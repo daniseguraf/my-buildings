@@ -17,13 +17,11 @@ model Building {
   id           Int          @id @default(autoincrement())
   name         String
   description  String?      @db.Text
-  yearBuilt    Int?
+  yearBuilt    Int
   propertyType PropertyType @default(RESIDENTIAL)
 
   // Address
-  street     String?
-  avenue     String?
-  number     String
+  address     String
   district   String
   city       String
   province   String
