@@ -25,12 +25,31 @@ export class BuildingsService {
     return await this.prismaService.building.findMany()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} building`
+  async findOne(id: number) {
+    try {
+      const building = await this.prismaService.building.findFirst({
+        where: { id },
+      })
+
+      if (!building) {
+        return `Building with id ${id} does not exist`
+      }
+
+      return building
+    } catch (error) {
+      throw new Error('aaa')
+    }
   }
 
   update(id: number, updateBuildingDto: UpdateBuildingDto) {
-    return `This action updates a #${id} building`
+    console.log('updateBuildingDto', id, updateBuildingDto)
+
+    const updatedBuilding = this.prismaService.building.update({
+      where: { id },
+      data: updateBuildingDto,
+    })
+
+    return updatedBuilding
   }
 
   remove(id: number) {
