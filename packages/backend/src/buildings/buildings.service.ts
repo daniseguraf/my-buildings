@@ -1,23 +1,24 @@
 import { Injectable } from '@nestjs/common'
 import { CreateBuildingDto } from './dto/create-building.dto'
 import { UpdateBuildingDto } from './dto/update-building.dto'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from '../prisma/prisma.service'
 
 @Injectable()
 export class BuildingsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(createBuildingDto: CreateBuildingDto) {
+    console.log('createBuildingDto', createBuildingDto)
     try {
-      console.log('createBuildingDto', createBuildingDto)
-
       const response = await this.prismaService.building.create({
         data: createBuildingDto,
       })
+      console.log('response', response)
 
       return response
     } catch (error) {
       console.log(error)
+      throw error
     }
   }
 
@@ -37,7 +38,8 @@ export class BuildingsService {
 
       return building
     } catch (error) {
-      throw new Error('aaa')
+      console.log(error)
+      throw error
     }
   }
 

@@ -137,10 +137,9 @@
   - [ ] Generate CommonAreas module
   - [ ] Generate basic service and controller files
 
-- [ ] Setup Prisma Service
-  - [ ] Create PrismaService
-  - [ ] Configure as global module
-  - [ ] Setup lifecycle hooks
+- [x] Setup Prisma Service
+  - [x] Create PrismaService
+  - [x] Setup lifecycle hooks
 
 ### Frontend - Base Configuration
 
@@ -184,15 +183,15 @@
 
 ### Backend
 
-- [ ] Create Buildings module with full CRUD
-  - [ ] Generate resource with NestJS CLI
-  - [ ] Setup module, service, controller
+- [x] Create Buildings module with full CRUD
+  - [x] Generate resource with NestJS CLI
+  - [x] Setup module, service, controller
 
 - [ ] Implement DTOs
-  - [ ] `CreateBuildingDto` with all fields
-  - [ ] `UpdateBuildingDto` as partial
-  - [ ] Add class-validator decorators
-  - [ ] Custom validation rules
+  - [x] `CreateBuildingDto` with all fields
+  - [x] `UpdateBuildingDto` as partial
+  - [x] Add class-validator decorators
+  - [x] Custom validation rules
 
 - [ ] Implement Buildings Service
   - [ ] `findAll()` method with pagination and filters
@@ -205,8 +204,8 @@
 - [ ] Implement Buildings Controller
   - [ ] `GET /buildings` - list with query params (page, limit, search)
   - [ ] `GET /buildings/:id` - get one with relations
-  - [ ] `POST /buildings` - create new building
-  - [ ] `PATCH /buildings/:id` - update building
+  - [x] `POST /buildings` - create new building
+  - [x] `PATCH /buildings/:id` - update building
   - [ ] `DELETE /buildings/:id` - soft delete building
   - [ ] Add proper HTTP status codes
 
