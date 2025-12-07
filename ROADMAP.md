@@ -63,23 +63,25 @@
   - [x] Create `.env` file for development
   - [x] Create `.env.template` for reference
   - [x] Add to `.gitignore`
+  - [x] Configure eslint-plugin-unused-imports
 
 ### Frontend Setup
 
-- [ ] Initialize Vite + React + TypeScript project
+- [x] Initialize Vite + React + TypeScript project
   - [x] Create new project with Vite
-  - [ ] Configure TypeScript
+  - [x] Configure TypeScript
 
-- [ ] Install main dependencies
+- [x] Install main dependencies
   - [x] Mantine core and hooks
   - [x] Mantine notifications and dates
   - [x] TanStack Query
   - [x] Axios
   - [x] React Router
 
-- [ ] Configure import aliases in `vite.config.ts`
-  - [ ] Setup `@/` path alias
-  - [ ] Configure resolve aliases
+- [x] Configure import aliases in `vite.config.ts`
+  - [x] Setup `@/` path alias
+  - [x] Configure resolve aliases
+  - [x] Configure eslint-plugin-unused-imports
 
 - [x] Create folder structure following architecture
   - [x] `/features` directory
@@ -132,7 +134,7 @@
 ### Backend - Base Module Setup
 
 - [ ] Create base modules (without auth for now)
-  - [ ] Generate Buildings module
+  - [x] Generate Buildings module
   - [ ] Generate Units module
   - [ ] Generate CommonAreas module
   - [ ] Generate basic service and controller files
@@ -142,17 +144,6 @@
   - [x] Setup lifecycle hooks
 
 ### Frontend - Base Configuration
-
-- [ ] Configure Axios client in `lib/axios.ts`
-  - [ ] Create axios instance
-  - [ ] Set baseURL from environment variables
-  - [ ] Configure default headers
-  - [ ] Setup interceptors (placeholder for auth later)
-
-- [ ] Setup React Query
-  - [ ] Create QueryClient configuration
-  - [ ] Setup QueryClientProvider
-  - [ ] Install React Query DevTools
 
 - [ ] Setup basic routing
   - [ ] Install React Router
@@ -164,6 +155,17 @@
   - [ ] AppShell with header and sidebar
   - [ ] Basic navigation menu
   - [ ] Page layout wrapper
+
+- [ ] Configure Axios client in `lib/axios.ts`
+  - [ ] Create axios instance
+  - [ ] Set baseURL from environment variables
+  - [ ] Configure default headers
+  - [ ] Setup interceptors (placeholder for auth later)
+
+- [ ] Setup React Query
+  - [ ] Create QueryClient configuration
+  - [ ] Setup QueryClientProvider
+  - [ ] Install React Query DevTools
 
 ### Week 1 Validation
 
