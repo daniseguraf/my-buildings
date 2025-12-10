@@ -163,18 +163,18 @@
   - [x] Configure default headers
   - [x] Setup interceptors (placeholder for auth later)
 
-- [ ] Setup React Query
-  - [ ] Create QueryClient configuration
-  - [ ] Setup QueryClientProvider
+- [x] Setup React Query
+  - [x] Create QueryClient configuration
+  - [x] Setup QueryClientProvider
   - [x] Install React Query DevTools
 
 ### Week 1 Validation
 
 - [ ] Database schema created and seeded
-- [ ] Both projects communicate successfully
+- [x] Both projects communicate successfully
 - [x] Basic routing works
 - [ ] Development environment stable
-- [ ] Can query data from backend to frontend
+- [x] Can query data from backend to frontend
 
 ---
 

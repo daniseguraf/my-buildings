@@ -6,6 +6,7 @@ type CreateBuildingDto = components['schemas']['CreateBuildingDto']
 export const buildingsService = {
   getAll: async () => {
     const { data } = await api.get('/buildings')
+
     return data
   },
 

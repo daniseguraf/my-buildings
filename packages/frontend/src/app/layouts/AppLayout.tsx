@@ -9,11 +9,15 @@ export const AppLayout = () => {
       header={{ height: 60 }}
       navbar={{ width: 300, breakpoint: 'sm' }}
       padding="md"
+      styles={{
+        main: {
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'orange',
+        },
+      }}
     >
-      <AppShell.Header>
-        <Header />
-      </AppShell.Header>
-
+      <Header />
       <Navbar />
 
       <AppShell.Main>
