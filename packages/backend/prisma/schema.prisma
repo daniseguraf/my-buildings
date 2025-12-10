@@ -3,6 +3,16 @@ generator client {
   output   = "../generated/prisma"
 }
 
+generator typescriptInterfaces {
+  provider = "prisma-generator-typescript-interfaces"
+  output   = "../../shared/src/types/prisma.types.ts"
+  prettier = true
+  // exportEnums = true
+  modelType = "type"
+  // enumType = "enum"
+  // enumSuffix = "Enum"
+}
+
 datasource db {
   provider = "postgresql"
 }

@@ -32,7 +32,8 @@
       "@lib/*": ["./src/lib/*"],
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@my-buildings/shared/*": ["../shared/src/*"]
     }
   },
   "include": ["src"]

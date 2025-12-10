@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
 import { Transform } from 'class-transformer'
 import {
   IsEmail,
@@ -12,17 +13,16 @@ import {
   Min,
   IsPhoneNumber,
 } from 'class-validator'
-
-export enum PropertyType {
-  RESIDENTIAL = 'RESIDENTIAL',
-  COMMERCIAL = 'COMMERCIAL',
-  MIXED = 'MIXED',
-}
+import { PropertyType } from 'generated/prisma/enums'
 
 const CURRENT_YEAR = new Date().getFullYear()
 const MIN_YEAR_BUILT = 1800
 
 export class CreateBuildingDto {
+  @ApiProperty({
+    description: 'Building name',
+    example: 'Main Building',
+  })
   @IsString()
   @IsNotEmpty()
   @Length(1, 255)
@@ -31,6 +31,10 @@ export class CreateBuildingDto {
   )
   name: string
 
+  @ApiPropertyOptional({
+    description: 'Building description',
+    example: 'This is a building description',
+  })
   @IsString()
   @IsOptional()
   @MaxLength(1000)
@@ -39,6 +43,10 @@ export class CreateBuildingDto {
   )
   description?: string
 
+  @ApiProperty({
+    example: 2020,
+    description: 'Year built',
+  })
   @IsInt()
   @Min(MIN_YEAR_BUILT)
   @Max(CURRENT_YEAR)
@@ -47,9 +55,18 @@ export class CreateBuildingDto {
   )
   yearBuilt: number
 
+  @ApiProperty({
+    example: PropertyType.RESIDENTIAL,
+    description: 'Property type',
+    enum: PropertyType,
+  })
   @IsEnum(PropertyType)
   propertyType: PropertyType
 
+  @ApiProperty({
+    example: 'Main Street',
+    description: 'Building address',
+  })
   @IsString()
   @IsNotEmpty()
   @Length(5, 500)
@@ -58,6 +75,10 @@ export class CreateBuildingDto {
   )
   address: string
 
+  @ApiProperty({
+    example: 'Main District',
+    description: 'Building district',
+  })
   @IsString()
   @IsNotEmpty()
   @Length(1, 100)
@@ -66,6 +87,10 @@ export class CreateBuildingDto {
   )
   district: string
 
+  @ApiProperty({
+    example: 'Main City',
+    description: 'Building city',
+  })
   @IsString()
   @IsNotEmpty()
   @Length(1, 100)
@@ -74,6 +99,10 @@ export class CreateBuildingDto {
   )
   city: string
 
+  @ApiProperty({
+    example: 'Main Province',
+    description: 'Building province',
+  })
   @IsString()
   @IsNotEmpty()
   @Length(1, 100)
@@ -82,6 +111,10 @@ export class CreateBuildingDto {
   )
   province: string
 
+  @ApiProperty({
+    example: '15001',
+    description: 'Building postal code',
+  })
   @IsString()
   @IsOptional()
   @Length(4, 10)
@@ -92,6 +125,10 @@ export class CreateBuildingDto {
   )
   postalCode?: string
 
+  @ApiProperty({
+    example: 10,
+    description: 'Number of floors',
+  })
   @IsInt()
   @Min(1)
   @Max(200)
@@ -100,10 +137,18 @@ export class CreateBuildingDto {
   )
   floors: number
 
+  @ApiProperty({
+    example: '+51 987 654 321',
+    description: 'Building phone number',
+  })
   @IsOptional()
   @IsPhoneNumber('ES')
   phoneNumber?: string
 
+  @ApiProperty({
+    example: 'contact@building.com',
+    description: 'Building email',
+  })
   @IsOptional()
   @IsEmail()
   @Transform(({ value }) =>

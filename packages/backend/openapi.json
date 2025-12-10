@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/buildings": {
+      "post": {
+        "operationId": "BuildingsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBuildingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The building has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Building"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Create a new building",
+        "tags": [
+          "Buildings"
+        ]
+      },
+      "get": {
+        "operationId": "BuildingsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The buildings have been successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Building"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all buildings",
+        "tags": [
+          "Buildings"
+        ]
+      }
+    },
+    "/api/v1/buildings/{id}": {
+      "get": {
+        "operationId": "BuildingsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The building has been successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Building"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a building by id",
+        "tags": [
+          "Buildings"
+        ]
+      },
+      "patch": {
+        "operationId": "BuildingsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBuildingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The building has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Building"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update a building by id",
+        "tags": [
+          "Buildings"
+        ]
+      },
+      "delete": {
+        "operationId": "BuildingsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The building has been successfully deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Building"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete a building by id",
+        "tags": [
+          "Buildings"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "My Buildings API",
+    "description": "Building Management API",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateBuildingDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Building name",
+            "example": "Main Building"
+          },
+          "description": {
+            "type": "string",
+            "description": "Building description",
+            "example": "This is a building description"
+          },
+          "yearBuilt": {
+            "type": "number",
+            "example": 2020,
+            "description": "Year built"
+          },
+          "propertyType": {
+            "type": "string",
+            "example": "RESIDENTIAL",
+            "description": "Property type",
+            "enum": [
+              "RESIDENTIAL",
+              "COMMERCIAL",
+              "MIXED"
+            ]
+          },
+          "address": {
+            "type": "string",
+            "example": "Main Street",
+            "description": "Building address"
+          },
+          "district": {
+            "type": "string",
+            "example": "Main District",
+            "description": "Building district"
+          },
+          "city": {
+            "type": "string",
+            "example": "Main City",
+            "description": "Building city"
+          },
+          "province": {
+            "type": "string",
+            "example": "Main Province",
+            "description": "Building province"
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "15001",
+            "description": "Building postal code"
+          },
+          "floors": {
+            "type": "number",
+            "example": 10,
+            "description": "Number of floors"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+51 987 654 321",
+            "description": "Building phone number"
+          },
+          "email": {
+            "type": "string",
+            "example": "contact@building.com",
+            "description": "Building email"
+          }
+        },
+        "required": [
+          "name",
+          "yearBuilt",
+          "propertyType",
+          "address",
+          "district",
+          "city",
+          "province",
+          "postalCode",
+          "floors",
+          "phoneNumber",
+          "email"
+        ]
+      },
+      "Building": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateBuildingDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Building name",
+            "example": "Main Building"
+          },
+          "description": {
+            "type": "string",
+            "description": "Building description",
+            "example": "This is a building description"
+          },
+          "yearBuilt": {
+            "type": "number",
+            "example": 2020,
+            "description": "Year built"
+          },
+          "propertyType": {
+            "type": "string",
+            "example": "RESIDENTIAL",
+            "description": "Property type",
+            "enum": [
+              "RESIDENTIAL",
+              "COMMERCIAL",
+              "MIXED"
+            ]
+          },
+          "address": {
+            "type": "string",
+            "example": "Main Street",
+            "description": "Building address"
+          },
+          "district": {
+            "type": "string",
+            "example": "Main District",
+            "description": "Building district"
+          },
+          "city": {
+            "type": "string",
+            "example": "Main City",
+            "description": "Building city"
+          },
+          "province": {
+            "type": "string",
+            "example": "Main Province",
+            "description": "Building province"
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "15001",
+            "description": "Building postal code"
+          },
+          "floors": {
+            "type": "number",
+            "example": 10,
+            "description": "Number of floors"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+51 987 654 321",
+            "description": "Building phone number"
+          },
+          "email": {
+            "type": "string",
+            "example": "contact@building.com",
+            "description": "Building email"
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "types:generate": "openapi-typescript http://localhost:3000/api/v1 -o ../shared/src/types/dto.types.ts",
+    "types:generate:local": "openapi-typescript ../backend/openapi.json -o ../shared/src/types/dto.types.ts"
   },
   "dependencies": {
+    "@my-buildings/shared": "workspace:*",
     "@mantine/core": "^8.3.9",
     "@mantine/dates": "^8.3.9",
     "@mantine/form": "^8.3.9",
@@ -36,6 +39,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "openapi-typescript": "^7.10.1",
     "playwright": "^1.57.0",
     "postcss": "^8.5.6",
     "postcss-preset-mantine": "^1.18.0",
