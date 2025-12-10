@@ -142,6 +142,7 @@
 - [x] Setup Prisma Service
   - [x] Create PrismaService
   - [x] Setup lifecycle hooks
+  - [x] Share TS types in frontend and backend
 
 ### Frontend - Base Configuration
 
@@ -156,22 +157,22 @@
   - [x] Basic navigation menu
   - [x] Page layout wrapper
 
-- [ ] Configure Axios client in `lib/axios.ts`
-  - [ ] Create axios instance
-  - [ ] Set baseURL from environment variables
-  - [ ] Configure default headers
-  - [ ] Setup interceptors (placeholder for auth later)
+- [x] Configure Axios client in `lib/axios.ts`
+  - [x] Create axios instance
+  - [x] Set baseURL from environment variables
+  - [x] Configure default headers
+  - [x] Setup interceptors (placeholder for auth later)
 
 - [ ] Setup React Query
   - [ ] Create QueryClient configuration
   - [ ] Setup QueryClientProvider
-  - [ ] Install React Query DevTools
+  - [x] Install React Query DevTools
 
 ### Week 1 Validation
 
 - [ ] Database schema created and seeded
 - [ ] Both projects communicate successfully
-- [ ] Basic routing works
+- [x] Basic routing works
 - [ ] Development environment stable
 - [ ] Can query data from backend to frontend
 
