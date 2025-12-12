@@ -6,5 +6,6 @@ export const useBuildings = () => {
   return useQuery<Building[]>({
     queryKey: ['buildings'],
     queryFn: () => buildingsService.getAll(),
+    staleTime: 1000 * 60 * 60,
   })
 }

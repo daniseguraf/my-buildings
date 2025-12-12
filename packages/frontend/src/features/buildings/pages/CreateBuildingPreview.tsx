@@ -1,5 +1,5 @@
 import { Container } from '@mantine/core'
-import { BuildingForm } from '../components/BuildingForm'
+import { BuildingForm } from '../components/CreateBuilding'
 
 export const CreateBuildingPage = () => {
   return (
