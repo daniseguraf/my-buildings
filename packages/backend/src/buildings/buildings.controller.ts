@@ -32,6 +32,7 @@ export class BuildingsController {
   })
   @ApiBadRequestResponse({ description: 'Bad Request' })
   create(@Body() createBuildingDto: CreateBuildingDto) {
+    console.log('createBuildingDto controller', createBuildingDto)
     return this.buildingsService.create(createBuildingDto)
   }
 

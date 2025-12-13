@@ -2,7 +2,19 @@
 
 export type UnitType = 'APARTMENT' | 'OFFICE' | 'COMMERCIAL'
 
+export const UnitTypeValues = {
+  APARTMENT: 'APARTMENT',
+  OFFICE: 'OFFICE',
+  COMMERCIAL: 'COMMERCIAL',
+} satisfies Record<string, UnitType>
+
 export type UnitStatus = 'AVAILABLE' | 'OCCUPIED' | 'MAINTENANCE'
+
+export const UnitStatusValues = {
+  AVAILABLE: 'AVAILABLE',
+  OCCUPIED: 'OCCUPIED',
+  MAINTENANCE: 'MAINTENANCE',
+} satisfies Record<string, UnitStatus>
 
 export type EmployeeRole =
   | 'MANAGER'
@@ -12,9 +24,31 @@ export type EmployeeRole =
   | 'GARDENER'
   | 'RECEPTIONIST'
 
+export const EmployeeRoleValues = {
+  MANAGER: 'MANAGER',
+  SECURITY: 'SECURITY',
+  CLEANER: 'CLEANER',
+  MAINTENANCE: 'MAINTENANCE',
+  GARDENER: 'GARDENER',
+  RECEPTIONIST: 'RECEPTIONIST',
+} satisfies Record<string, EmployeeRole>
+
 export type PropertyType = 'RESIDENTIAL' | 'COMMERCIAL' | 'MIXED'
 
+export const PropertyTypeValues = {
+  RESIDENTIAL: 'RESIDENTIAL',
+  COMMERCIAL: 'COMMERCIAL',
+  MIXED: 'MIXED',
+} satisfies Record<string, PropertyType>
+
 export type UserRole = 'ADMIN' | 'MANAGER' | 'RESIDENT' | 'STAFF'
+
+export const UserRoleValues = {
+  ADMIN: 'ADMIN',
+  MANAGER: 'MANAGER',
+  RESIDENT: 'RESIDENT',
+  STAFF: 'STAFF',
+} satisfies Record<string, UserRole>
 
 export type Building = {
   id: number

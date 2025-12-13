@@ -41,6 +41,38 @@ export interface paths {
         patch: operations["BuildingsController_update"];
         trace?: never;
     };
+    "/api/v1/employees": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EmployeesController_findAll"];
+        put?: never;
+        post: operations["EmployeesController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/employees/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EmployeesController_findOne"];
+        put?: never;
+        post?: never;
+        delete: operations["EmployeesController_remove"];
+        options?: never;
+        head?: never;
+        patch: operations["EmployeesController_update"];
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -107,6 +139,11 @@ export interface components {
              * @example contact@building.com
              */
             email: string;
+            /**
+             * @description Manager ID
+             * @example 1
+             */
+            managerId: number;
         };
         Building: Record<string, never>;
         UpdateBuildingDto: {
@@ -171,6 +208,101 @@ export interface components {
              * @example contact@building.com
              */
             email?: string;
+            /**
+             * @description Manager ID
+             * @example 1
+             */
+            managerId?: number;
+        };
+        CreateEmployeeDto: {
+            /**
+             * @description Employee first name
+             * @example John
+             */
+            firstName: string;
+            /**
+             * @description Employee last name
+             * @example Doe
+             */
+            lastName: string;
+            /**
+             * @description Employee phone number
+             * @example +51 987 654 321
+             */
+            phoneNumber: string;
+            /**
+             * @description Employee email
+             * @example john.doe@example.com
+             */
+            email: string;
+            /**
+             * @description Employee role
+             * @example MANAGER
+             * @enum {string}
+             */
+            role: "MANAGER" | "SECURITY" | "CLEANER" | "MAINTENANCE" | "GARDENER" | "RECEPTIONIST";
+            /**
+             * Format: date-time
+             * @description Employee start date
+             * @example 2025-01-01
+             */
+            startDate: string;
+            /**
+             * Format: date-time
+             * @description Employee end date
+             * @example 2025-01-01
+             */
+            endDate: string;
+            /**
+             * @description Employee is active
+             * @example true
+             */
+            isActive: boolean;
+        };
+        UpdateEmployeeDto: {
+            /**
+             * @description Employee first name
+             * @example John
+             */
+            firstName?: string;
+            /**
+             * @description Employee last name
+             * @example Doe
+             */
+            lastName?: string;
+            /**
+             * @description Employee phone number
+             * @example +51 987 654 321
+             */
+            phoneNumber?: string;
+            /**
+             * @description Employee email
+             * @example john.doe@example.com
+             */
+            email?: string;
+            /**
+             * @description Employee role
+             * @example MANAGER
+             * @enum {string}
+             */
+            role?: "MANAGER" | "SECURITY" | "CLEANER" | "MAINTENANCE" | "GARDENER" | "RECEPTIONIST";
+            /**
+             * Format: date-time
+             * @description Employee start date
+             * @example 2025-01-01
+             */
+            startDate?: string;
+            /**
+             * Format: date-time
+             * @description Employee end date
+             * @example 2025-01-01
+             */
+            endDate?: string;
+            /**
+             * @description Employee is active
+             * @example true
+             */
+            isActive?: boolean;
         };
     };
     responses: never;
@@ -299,6 +431,105 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["Building"];
                 };
+            };
+        };
+    };
+    EmployeesController_findAll: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EmployeesController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEmployeeDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EmployeesController_findOne: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EmployeesController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EmployeesController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEmployeeDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

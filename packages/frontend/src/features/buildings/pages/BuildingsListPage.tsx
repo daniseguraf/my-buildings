@@ -12,12 +12,14 @@ import {
 } from '@mantine/core'
 import { Link } from 'react-router'
 import { PlusIcon } from '@phosphor-icons/react/dist/csr/Plus'
-import { CreateBuilding } from '@features/buildings/components/CreateBuilding'
+import { BuildingForm } from '@features/buildings/components/BuildingForm'
 import { useDisclosure } from '@mantine/hooks'
 
 export const BuildingsListPage = () => {
-  const { data: buildings, isLoading } = useBuildings()
+  const { getAll } = useBuildings()
   const [opened, { open, close }] = useDisclosure(false)
+
+  const { data: buildings, isLoading } = getAll
 
   return (
     <>
@@ -86,7 +88,7 @@ export const BuildingsListPage = () => {
         </Grid>
       </Container>
 
-      <CreateBuilding opened={opened} onClose={close} />
+      <BuildingForm opened={opened} onClose={close} />
     </>
   )
 }

@@ -8,6 +8,7 @@ export class BuildingsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(createBuildingDto: CreateBuildingDto) {
+    console.log('createBuildingDto', createBuildingDto)
     try {
       const response = await this.prismaService.building.create({
         data: createBuildingDto,

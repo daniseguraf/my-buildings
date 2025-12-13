@@ -1,38 +1,22 @@
-export enum PropertyType {
-  RESIDENTIAL = 'RESIDENTIAL',
-  COMMERCIAL = 'COMMERCIAL',
-  MIXED = 'MIXED',
+import type { PropertyType } from '@my-buildings/shared/index'
+
+export type BuildingFormProps = {
+  opened: boolean
+  onClose: () => void
 }
 
-export interface Building {
-  id: number
+export interface BuildingFormValues {
   name: string
-  description?: string
-  yearBuilt: number
-  propertyType: PropertyType
   address: string
   district: string
   city: string
   province: string
   postalCode?: string
-  floors: number
-  phoneNumber?: string
-  email?: string
-  createdAt?: Date
-  updatedAt?: Date
-}
-
-export interface CreateBuildingDto {
-  name: string
-  description?: string
-  yearBuilt: number
+  managerId?: number
   propertyType: PropertyType
-  address: string
-  district: string
-  city: string
-  province: string
-  postalCode?: string
-  floors: number
+  yearBuilt?: number
+  floors?: number
   phoneNumber?: string
   email?: string
+  description?: string
 }
