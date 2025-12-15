@@ -124,13 +124,6 @@
   - [x] Apply migration to database
   - [x] Verify schema in database
 
-- [ ] Create seeders with test data
-  - [ ] 1 admin user (without password for now)
-  - [ ] 3 sample buildings
-  - [ ] 10 units per building
-  - [ ] 5 common areas per building
-  - [ ] Run seed script
-
 ### Backend - Base Module Setup
 
 - [ ] Create base modules (without auth for now)
@@ -211,6 +204,13 @@
   - [x] `PATCH /buildings/:id` - update building
   - [ ] `DELETE /buildings/:id` - soft delete building
   - [ ] Add proper HTTP status codes
+
+  - [ ] Create seeders with test data
+  - [ ] 1 admin user (without password for now)
+  - [ ] 3 sample buildings
+  - [ ] 10 units per building
+  - [ ] 5 common areas per building
+  - [ ] Run seed script
 
 ### Frontend
 
@@ -463,6 +463,13 @@
   - [ ] `PATCH /bookings/:id/status` - approve/reject (admin/manager)
   - [ ] `DELETE /bookings/:id` - cancel
   - [ ] `GET /bookings/available-slots` - get available slots
+
+- [ ] Create seeders with test data
+  - [ ] 1 admin user (without password for now)
+  - [ ] 3 sample buildings
+  - [ ] 10 units per building
+  - [ ] 5 common areas per building
+  - [ ] Run seed script
 
 ### Backend Validation
 

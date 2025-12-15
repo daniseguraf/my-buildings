@@ -5,7 +5,7 @@ import { BuildingApartmentIcon } from '@phosphor-icons/react/dist/csr/BuildingAp
 export const Header = () => {
   return (
     <AppShell.Header>
-      <Group h="100%" px="md">
+      <Group h="100%" px="md" justify="space-between">
         <Burger hiddenFrom="sm" size="sm" />
 
         <Group gap="xs">
@@ -15,9 +15,7 @@ export const Header = () => {
           </Title>
         </Group>
 
-        <Group gap="xs">
-          <ThemeToggle />
-        </Group>
+        <ThemeToggle />
       </Group>
     </AppShell.Header>
   )

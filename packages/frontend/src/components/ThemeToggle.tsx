@@ -1,9 +1,10 @@
-import { ActionIcon, useMantineColorScheme, Tooltip } from '@mantine/core'
+import { useColorScheme } from '@hooks/useColorScheme'
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { MoonIcon } from '@phosphor-icons/react/dist/csr/Moon'
 import { SunIcon } from '@phosphor-icons/react/dist/csr/Sun'
 
 export const ThemeToggle = () => {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
+  const { colorScheme, toggleColorScheme } = useColorScheme()
   const isDark = colorScheme === 'dark'
 
   return (
