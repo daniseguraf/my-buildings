@@ -8,11 +8,17 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { queryClient } from '@lib/queryClient'
 
 import '@mantine/core/styles.css'
+import { useColorScheme } from '@hooks/useColorScheme'
 
 export const App = () => {
+  const { colorScheme, toggleColorScheme } = useColorScheme()
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={theme}>
+      <MantineProvider
+        theme={theme}
+        defaultColorScheme={colorScheme}
+        forceColorScheme={colorScheme}
+      >
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>

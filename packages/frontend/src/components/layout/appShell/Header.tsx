@@ -1,3 +1,4 @@
+import { ThemeToggle } from '@components/ThemeToggle'
 import { AppShell, Burger, Group, Title } from '@mantine/core'
 import { BuildingApartmentIcon } from '@phosphor-icons/react/dist/csr/BuildingApartment'
 
@@ -12,6 +13,10 @@ export const Header = () => {
           <Title order={1} size="xl">
             Buildings Manager System
           </Title>
+        </Group>
+
+        <Group gap="xs">
+          <ThemeToggle />
         </Group>
       </Group>
     </AppShell.Header>
