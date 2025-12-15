@@ -1,4 +1,4 @@
-import { useBuildings } from '@features/buildings/hooks/useBuildings'
+import { useBuildings } from '@features/buildings/hooks/queries/useBuildings'
 import {
   Button,
   Card,
@@ -16,10 +16,8 @@ import { BuildingForm } from '@features/buildings/components/BuildingForm'
 import { useDisclosure } from '@mantine/hooks'
 
 export const BuildingsListPage = () => {
-  const { getAll } = useBuildings()
+  const { data: buildings, isLoading } = useBuildings()
   const [opened, { open, close }] = useDisclosure(false)
-
-  const { data: buildings, isLoading } = getAll
 
   return (
     <>

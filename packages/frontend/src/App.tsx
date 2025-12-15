@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { queryClient } from '@lib/queryClient'
 
 import '@mantine/core/styles.css'
-// import '@mantine/drawer/styles.css'
 
 export const App = () => {
   return (

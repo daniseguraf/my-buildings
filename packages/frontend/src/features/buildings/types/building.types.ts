@@ -1,4 +1,6 @@
-import type { PropertyType } from '@my-buildings/shared/index'
+import type { components, PropertyType } from '@my-buildings/shared/index'
+
+export type CreateBuildingDto = components['schemas']['CreateBuildingDto']
 
 export type BuildingFormProps = {
   opened: boolean

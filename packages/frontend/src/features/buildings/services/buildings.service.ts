@@ -17,9 +17,7 @@ export const buildingsService = {
   },
 
   create: async (dto: CreateBuildingDto): Promise<Building> => {
-    console.log('dto', dto)
     const { data } = await api.post<Building>('/buildings', dto)
-    console.log('data', data)
     return data
   },
 

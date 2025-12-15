@@ -12,13 +12,14 @@ import { useForm } from '@mantine/form'
 import type {
   BuildingFormProps,
   BuildingFormValues,
+  CreateBuildingDto,
 } from '../types/building.types'
 import type { FC } from 'react'
 import { PropertyTypeValues } from '@my-buildings/shared/index'
-import { useBuildings } from '@features/buildings/hooks/useBuildings'
+import { useCreateBuilding } from '@features/buildings/hooks/mutations/useCreateBuilding'
 
 export const BuildingForm: FC<BuildingFormProps> = ({ opened, onClose }) => {
-  const { create } = useBuildings()
+  const { mutate: createBuilding, isPending } = useCreateBuilding()
 
   const form = useForm<BuildingFormValues>({
     initialValues: {
@@ -44,7 +45,7 @@ export const BuildingForm: FC<BuildingFormProps> = ({ opened, onClose }) => {
   }
 
   const handleCreate = () => {
-    create.mutate(form.values)
+    createBuilding(form.values as CreateBuildingDto)
   }
 
   return (
@@ -171,7 +172,7 @@ export const BuildingForm: FC<BuildingFormProps> = ({ opened, onClose }) => {
           <Button variant="light" size="sm" onClick={handleClose}>
             Cancelar
           </Button>
-          <Button size="sm" onClick={handleCreate}>
+          <Button size="sm" onClick={handleCreate} loading={isPending}>
             Crear Edificio
           </Button>
         </Group>
