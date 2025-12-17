@@ -189,7 +189,7 @@
   - [x] Add class-validator decorators
   - [x] Custom validation rules
 
-- [ ] Implement Buildings Service
+- [x] Implement Buildings Service
   - [x] `findAll()` method
   - [x] `findOne(id)` method with relations
   - [x] `create(dto)` method
@@ -206,13 +206,13 @@
 
 ### Frontend
 
-- [ ] Create `features/buildings/` structure
-  - [ ] Create `building.types.ts` with interfaces
-  - [ ] Create `buildings.service.ts` with API calls
+- [x] Create `features/buildings/` structure
+  - [x] Create `building.types.ts` with interfaces
+  - [x] Create `buildings.service.ts` with API calls
   - [ ] Create custom hooks:
-    - [ ] `useBuildings.ts` (query for list)
+    - [x] `useBuildings.ts` (query for list)
     - [ ] `useBuilding.ts` (query for single)
-    - [ ] `useCreateBuilding.ts` (mutation)
+    - [x] `useCreateBuilding.ts` (mutation)
     - [ ] `useUpdateBuilding.ts` (mutation)
     - [ ] `useDeleteBuilding.ts` (mutation)
 

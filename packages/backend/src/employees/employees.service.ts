@@ -20,8 +20,8 @@ export class EmployeesService {
     }
   }
 
-  findAll() {
-    return `This action returns all employees`
+  async findAll() {
+    return await this.prismaService.employee.findMany()
   }
 
   findOne(id: number) {

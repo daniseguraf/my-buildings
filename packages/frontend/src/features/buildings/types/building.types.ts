@@ -14,7 +14,7 @@ export interface BuildingFormValues {
   city: string
   province: string
   postalCode?: string
-  managerId?: number
+  managerId?: string
   propertyType: PropertyType
   yearBuilt?: number
   floors?: number

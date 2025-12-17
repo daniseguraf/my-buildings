@@ -4,42 +4,27 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
-  IsString,
+  IsOptional,
 } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { EmployeeRole } from 'generated/prisma/client'
+import {
+  IsOptionalString,
+  IsRequiredString,
+} from 'src/common/decorators/validation.decorators'
 
 export class CreateEmployeeDto {
-  @ApiProperty({
-    example: 'John',
-    description: 'Employee first name',
-  })
-  @IsString()
-  @IsNotEmpty()
+  @IsRequiredString(1, 255, 'John Doe', 'Employee first name')
   firstName: string
 
-  @ApiProperty({
-    example: 'Doe',
-    description: 'Employee last name',
-  })
-  @IsString()
-  @IsNotEmpty()
+  @IsRequiredString(1, 255, 'Doe', 'Employee last name')
   lastName: string
 
-  @ApiProperty({
-    example: '+51 987 654 321',
-    description: 'Employee phone number',
-  })
-  @IsString()
-  @IsNotEmpty()
-  phoneNumber: string
+  @IsOptionalString(100, '+51 987 654 321', 'Employee phone number')
+  phoneNumber?: string
 
-  @ApiProperty({
-    example: 'john.doe@example.com',
-    description: 'Employee email',
-  })
+  @IsRequiredString(1, 255, 'john.doe@example.com', 'Employee email')
   @IsEmail()
-  @IsNotEmpty()
   email: string
 
   @ApiProperty({
@@ -63,7 +48,8 @@ export class CreateEmployeeDto {
     description: 'Employee end date',
   })
   @IsDate()
-  endDate: Date
+  @IsOptional()
+  endDate?: Date
 
   @ApiProperty({
     example: true,

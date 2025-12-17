@@ -17,9 +17,19 @@ import type {
 import type { FC } from 'react'
 import { PropertyTypeValues } from '@my-buildings/shared/index'
 import { useCreateBuilding } from '@features/buildings/hooks/mutations/useCreateBuilding'
+import { useEmployees } from '@features/employees/hooks/useEmployees'
 
 export const BuildingForm: FC<BuildingFormProps> = ({ opened, onClose }) => {
   const { mutate: createBuilding, isPending } = useCreateBuilding()
+  const { data: employees } = useEmployees()
+
+  const managerOptions =
+    employees?.map(employee => ({
+      value: `${employee.id}`,
+      label: `${employee.firstName} ${employee.lastName}`,
+    })) ?? []
+
+  console.log('managerOptions', managerOptions)
 
   const form = useForm<BuildingFormValues>({
     initialValues: {
@@ -29,7 +39,7 @@ export const BuildingForm: FC<BuildingFormProps> = ({ opened, onClose }) => {
       city: '',
       province: '',
       postalCode: '',
-      managerId: undefined,
+      managerId: '',
       propertyType: PropertyTypeValues.RESIDENTIAL,
       yearBuilt: undefined,
       floors: undefined,
@@ -45,7 +55,10 @@ export const BuildingForm: FC<BuildingFormProps> = ({ opened, onClose }) => {
   }
 
   const handleCreate = () => {
-    createBuilding(form.values as CreateBuildingDto)
+    createBuilding({
+      ...form.values,
+      managerId: Number(form.values.managerId),
+    } as CreateBuildingDto)
   }
 
   return (
@@ -103,12 +116,11 @@ export const BuildingForm: FC<BuildingFormProps> = ({ opened, onClose }) => {
           />
         </Group>
 
-        <NumberInput
+        <Select
           label="Gerente del Edificio"
-          placeholder="Ej: 1"
+          placeholder="Selecciona el gerente"
           required
-          min={1}
-          hideControls
+          data={managerOptions}
           {...form.getInputProps('managerId')}
         />
 

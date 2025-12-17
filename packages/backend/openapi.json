@@ -502,7 +502,7 @@
         "properties": {
           "firstName": {
             "type": "string",
-            "example": "John",
+            "example": "John Doe",
             "description": "Employee first name"
           },
           "lastName": {
@@ -554,7 +554,6 @@
         "required": [
           "firstName",
           "lastName",
-          "phoneNumber",
           "email",
           "role",
           "startDate",
@@ -567,7 +566,7 @@
         "properties": {
           "firstName": {
             "type": "string",
-            "example": "John",
+            "example": "John Doe",
             "description": "Employee first name"
           },
           "lastName": {
