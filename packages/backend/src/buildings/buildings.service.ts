@@ -39,6 +39,16 @@ export class BuildingsService {
   async findOne(id: number) {
     const building = await this.prismaService.building.findUnique({
       where: { id },
+      include: {
+        manager: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
+      },
     })
 
     if (!building) {

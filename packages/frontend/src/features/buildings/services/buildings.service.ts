@@ -11,7 +11,7 @@ export const buildingsService = {
     return data
   },
 
-  getById: async (id: string): Promise<Building> => {
+  getById: async (id: number): Promise<Building> => {
     const { data } = await api.get<Building>(`/buildings/${id}`)
     return data
   },
