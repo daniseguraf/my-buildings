@@ -6,7 +6,11 @@ type UpdateEmployeeDto = components['schemas']['UpdateEmployeeDto']
 
 export const employeesService = {
   getAll: async (): Promise<Employee[]> => {
-    const { data } = await api.get<Employee[]>('/employees')
+    const { data } = await api.get<Employee[]>('/employees', {
+      metadata: {
+        operationName: 'getAllEmployees',
+      },
+    })
 
     return data
   },

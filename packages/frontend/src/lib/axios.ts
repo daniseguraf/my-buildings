@@ -1,5 +1,14 @@
 import axios from 'axios'
 
+// Agregar al inicio del archivo axios.ts
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    metadata?: {
+      operationName?: string
+    }
+  }
+}
+
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1',
   timeout: 10000,
@@ -15,6 +24,11 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
+
+    if (config.metadata?.operationName) {
+      config.headers['X-Operation-Name'] = config.metadata.operationName
+    }
+
     return config
   },
   error => Promise.reject(error)

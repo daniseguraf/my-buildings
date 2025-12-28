@@ -14,7 +14,7 @@ export type BuildingFormProps = {
   isEdit?: boolean
 }
 
-export interface BuildingFormValues {
+export type BuildingFormValues = {
   name: string
   address: string
   district: string

@@ -26,6 +26,7 @@ import {
   UserIcon,
   MapPinIcon,
   UsersIcon,
+  CurrencyDollarIcon,
 } from '@phosphor-icons/react'
 
 import { useBuilding } from '@features/buildings/hooks/queries/useBuilding'
@@ -56,8 +57,6 @@ export const BuildingDetailPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
 
   const { isPending, data: building } = useBuilding(Number(id))
-
-  const handleEditBuilding = () => {}
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -153,9 +152,17 @@ export const BuildingDetailPage = () => {
               Información General
             </Tabs.Tab>
 
+            <Tabs.Tab
+              value="financial"
+              leftSection={<CurrencyDollarIcon size={18} />}
+            >
+              Datos Financieros
+            </Tabs.Tab>
+
             <Tabs.Tab value="amenities" leftSection={<CheckIcon size={18} />}>
               Amenidades
             </Tabs.Tab>
+
             <Tabs.Tab value="contact" leftSection={<UserIcon size={18} />}>
               Contacto
             </Tabs.Tab>
