@@ -209,40 +209,36 @@
 - [x] Create `features/buildings/` structure
   - [x] Create `building.types.ts` with interfaces
   - [x] Create `buildings.service.ts` with API calls
-  - [ ] Create custom hooks:
+  - [x] Create custom hooks:
     - [x] `useBuildings.ts` (query for list)
-    - [ ] `useBuilding.ts` (query for single)
+    - [x] `useBuilding.ts` (query for single)
     - [x] `useCreateBuilding.ts` (mutation)
-    - [ ] `useUpdateBuilding.ts` (mutation)
-    - [ ] `useDeleteBuilding.ts` (mutation)
+    - [x] `useUpdateBuilding.ts` (mutation)
+    - [x] `useDeleteBuilding.ts` (mutation)
 
 - [ ] Create Buildings Components
   - [ ] `BuildingTable.tsx` - table with Mantine
-    - [x] Columns: photo, building name, address, manager, type, view more
-    - [ ] Actions: view, edit, delete buttons
-    - [ ] Pagination component
+    - [x] Columns: photo, building name, address, manager, type, actions
+    - [x] Actions: view, delete buttons
     - [ ] Loading skeleton
     - [ ] Empty state
   - [ ] `BuildingForm.tsx` - modal form
-    - [ ] All model fields as inputs
-    - [ ] Validations with Mantine useForm
-    - [ ] Handle create and edit modes
+    - [x] Model fields as inputs
+    - [x] Validations with Mantine useForm
+    - [x] Handle create and edit modes
     - [ ] States: idle, submitting, success, error
-  - [ ] `BuildingCard.tsx` - card for mobile view
-  - [ ] `BuildingFilters.tsx` - search and filter inputs
-  - [ ] `DeleteBuildingDialog.tsx` - confirmation modal
+  - [x] `DeleteBuildingDialog.tsx` - confirmation modal
 
-- [ ] Create Pages
-  - [ ] `BuildingsListPage.tsx`
-    - [ ] Page header with "New Building" button
-    - [ ] Filters section
-    - [ ] Buildings table
-    - [ ] Handle modals (create, edit, delete)
-  - [ ] `BuildingDetailPage.tsx`
-    - [ ] Building general info
-    - [ ] Tabs: Units, Common Areas, Staff (placeholder for now)
-    - [ ] Edit button
-    - [ ] Back button
+- [x] Create Pages
+  - [x] `BuildingsListPage.tsx`
+    - [x] Page header with "New Building" button
+    - [x] Buildings table
+    - [x] Handle modals (create, edit, delete)
+  - [x] `BuildingDetailPage.tsx`
+    - [x] Building general info
+    - [x] Tabs: Genera Information, Financial, Common Areas, Staff (placeholder for now)
+    - [x] Edit button
+    - [x] Back button
 
 ### Validation
 
