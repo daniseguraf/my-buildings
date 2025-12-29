@@ -1,4 +1,4 @@
-import { PropertyTypeValues } from '@my-buildings/shared/index'
+import { AmenitiesValues, PropertyTypeValues } from '@my-buildings/shared/index'
 import { z } from 'zod'
 
 export const buildingFormSchema = z.object({
@@ -16,7 +16,22 @@ export const buildingFormSchema = z.object({
   ]),
   yearBuilt: z.number().min(1800).max(new Date().getFullYear()),
   floors: z.number().min(1).max(300),
-  phoneNumber: z.string().optional(),
-  email: z.email().optional(),
   description: z.string().optional(),
+  amenities: z.array(z.string()).optional(),
 })
+
+export const amenitiesOptions = [
+  { value: AmenitiesValues.PARKING, label: 'Estacionamiento' },
+  { value: AmenitiesValues.SECURITY_24_7, label: 'Seguridad 24/7' },
+  { value: AmenitiesValues.ELEVATOR, label: 'Elevador' },
+  {
+    value: AmenitiesValues.WHEELCHAIR_ACCESS,
+    label: 'Acceso para sillas de ruedas',
+  },
+  {
+    value: AmenitiesValues.WHEELCHAIR_LIFT,
+    label: 'Ascensor para sillas de ruedas',
+  },
+  { value: AmenitiesValues.FIRE_ALARM, label: 'Alarma de incendio' },
+  { value: AmenitiesValues.CAMERAS, label: 'Cámaras de seguridad' },
+]

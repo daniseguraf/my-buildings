@@ -11,8 +11,9 @@ import {
   Max,
   Min,
   IsPhoneNumber,
+  IsArray,
 } from 'class-validator'
-import { PropertyType } from 'generated/prisma/enums'
+import { Amenities, PropertyType } from 'generated/prisma/enums'
 import {
   IsOptionalString,
   IsRequiredString,
@@ -131,7 +132,10 @@ export class CreateBuildingDto {
     description: 'Building phone number',
   })
   @IsOptional()
-  @IsPhoneNumber('ES')
+  @IsPhoneNumber()
+  @Transform(({ value }) =>
+    typeof value === 'string' && value.trim() ? value.trim() : undefined
+  )
   phoneNumber?: string
 
   @ApiProperty({
@@ -157,4 +161,14 @@ export class CreateBuildingDto {
     typeof value === 'string' ? parseInt(value, 10) : Number(value)
   )
   managerId: number
+
+  @ApiProperty({
+    example: [Amenities.ELEVATOR],
+    description: 'Building amenities',
+    enum: Amenities,
+  })
+  @IsOptional()
+  @IsArray()
+  @IsEnum(Amenities, { each: true })
+  amenities?: Amenities[]
 }

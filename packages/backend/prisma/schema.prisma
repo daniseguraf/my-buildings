@@ -37,7 +37,8 @@ model Building {
   deletedAt    DateTime?    @db.Timestamptz(6) @map("deleted_at")
   manager       Employee    @relation(fields: [managerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   managerId    Int          @map("manager_id")
-  // commonAreas  CommonArea[]
+  commonAreas  CommonArea[]
+  amenities    Amenities[]
   // staff        Staff[]
   // units        Unit[]
 
@@ -80,7 +81,7 @@ model Unit {
 model CommonArea {
   id          Int      @id @default(autoincrement())
   buildingId  Int      @map("building_id")
-  // building    Building @relation(fields: [buildingId], references: [id])
+  building    Building @relation(fields: [buildingId], references: [id])
   name        String
   description String?
   capacity    Int
@@ -124,4 +125,14 @@ enum UserRole {
   MANAGER
   RESIDENT
   STAFF
+}
+
+enum Amenities {
+  PARKING
+  SECURITY_24_7
+  ELEVATOR
+  WHEELCHAIR_ACCESS
+  WHEELCHAIR_LIFT
+  FIRE_ALARM
+  CAMERAS
 }

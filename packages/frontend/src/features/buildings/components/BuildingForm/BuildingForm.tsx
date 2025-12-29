@@ -2,6 +2,7 @@ import {
   Button,
   Drawer,
   Group,
+  MultiSelect,
   NumberInput,
   Select,
   Stack,
@@ -18,7 +19,10 @@ import { useEffect, type FC } from 'react'
 import { PropertyTypeValues, type Building } from '@my-buildings/shared/index'
 import { useCreateBuilding } from '@features/buildings/hooks/mutations/useCreateBuilding'
 import { useEmployees } from '@features/employees/hooks/useEmployees'
-import { buildingFormSchema } from '@features/buildings/components/BuildingForm/BuildingForm.helpers'
+import {
+  amenitiesOptions,
+  buildingFormSchema,
+} from '@features/buildings/components/BuildingForm/BuildingForm.helpers'
 import { zod4Resolver } from 'mantine-form-zod-resolver'
 import { useUpdateBuilding } from '@features/buildings/hooks/mutations/useUpdateBuilding'
 
@@ -53,6 +57,7 @@ export const BuildingForm: FC<BuildingFormProps> = ({
     phoneNumber,
     email,
     description,
+    amenities,
   } = (building as Building) ?? {}
 
   const managerOptions =
@@ -75,6 +80,7 @@ export const BuildingForm: FC<BuildingFormProps> = ({
     phoneNumber: phoneNumber ?? '',
     email: email ?? '',
     description: description ?? '',
+    amenities: amenities ?? [],
   }
 
   const form = useForm<BuildingFormValues>({
@@ -104,6 +110,8 @@ export const BuildingForm: FC<BuildingFormProps> = ({
   }
 
   const handleCreate = () => {
+    console.log('handleCreate', form.values)
+
     createBuilding(
       {
         ...form.values,
@@ -262,6 +270,13 @@ export const BuildingForm: FC<BuildingFormProps> = ({
           />
         </Group>
 
+        <MultiSelect
+          label="Amenidades"
+          placeholder="Selecciona las amenidades"
+          data={amenitiesOptions}
+          {...form.getInputProps('amenities')}
+        />
+
         <Textarea
           label="Descripción"
           placeholder="Descripción del edificio (opcional)"
@@ -273,6 +288,7 @@ export const BuildingForm: FC<BuildingFormProps> = ({
           <Button variant="light" size="sm" onClick={handleClose}>
             Cancelar
           </Button>
+
           <Button
             size="sm"
             onClick={handleSubmit}

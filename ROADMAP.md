@@ -1,48 +1,29 @@
 # 🗺️ Development Roadmap - Building Management System
 
-> **Duration:** 9 weeks full-time
 > **Stack:** NestJS, React, TypeScript, Mantine, TanStack Query, Prisma, PostgreSQL
 > **Goal:** Fully functional and deployed fullstack application
 
 ---
 
-## 📊 Overall Progress
-
-- [ ] **Week 1:** Setup and Foundations (0/5)
-- [ ] **Week 2:** Buildings and Common Areas CRUD (0/5)
-- [ ] **Week 3:** Units and Residents Management (0/5)
-- [ ] **Week 4:** Booking System (0/5)
-- [ ] **Week 5:** Staff and Tickets Management (0/5)
-- [ ] **Week 6:** Authentication and Authorization (0/5)
-- [ ] **Week 7:** Dashboard and Deployment V1 (0/5)
-- [ ] **Week 8:** Polish and Documentation (0/5)
-- [ ] **Week 9:** UX Refinement and Internationalization (0/5)
-
-**Total Progress: 0/45 main tasks completed**
-
----
-
 ## 🎯 Key Milestones
 
-| Milestone                    | Target Date   | Status     |
-| ---------------------------- | ------------- | ---------- |
-| 🏗️ Complete Setup            | End of Week 1 | ⏳ Pending |
-| 🏢 Buildings CRUD Functional | End of Week 2 | ⏳ Pending |
-| 👥 Residents Management      | End of Week 3 | ⏳ Pending |
-| 📅 Booking System            | End of Week 4 | ⏳ Pending |
-| 🎫 Tickets System            | End of Week 5 | ⏳ Pending |
-| 🔐 Authentication Complete   | End of Week 6 | ⏳ Pending |
-| 🚀 First Deployed Version    | End of Week 7 | ⏳ Pending |
-| 📝 Final Documentation       | End of Week 8 | ⏳ Pending |
-| 🌐 UX & i18n Complete        | End of Week 9 | ⏳ Pending |
+| Milestone                    | Status     |
+| ---------------------------- | ---------- |
+| 🏗️ Complete Setup            | ✅ Done    |
+| 🏢 Buildings CRUD Functional | ⏳ Pending |
+| 👥 Residents Management      | ⏳ Pending |
+| 📅 Booking System            | ⏳ Pending |
+| 🎫 Tickets System            | ⏳ Pending |
+| 🔐 Authentication Complete   | ⏳ Pending |
+| 🚀 First Deployed Version    | ⏳ Pending |
+| 📝 Final Documentation       | ⏳ Pending |
+| 🌐 UX & i18n Complete        | ⏳ Pending |
 
 ---
 
 # 📅 WEEK 1: Setup and Foundations
 
 **Goal:** Both projects running, connected, with basic data models ready.
-
-## Days 1-2: Project Configuration
 
 ### Backend Setup
 
@@ -106,8 +87,6 @@
 
 ---
 
-## Days 3-5: Data Modeling
-
 ### Backend - Prisma Schema
 
 - [x] Design and create complete schema in `schema.prisma`
@@ -125,14 +104,6 @@
   - [x] Generate migration
   - [x] Apply migration to database
   - [x] Verify schema in database
-
-### Backend - Base Module Setup
-
-- [ ] Create base modules (without auth for now)
-  - [x] Generate Buildings module
-  - [ ] Generate Units module
-  - [ ] Generate CommonAreas module
-  - [ ] Generate basic service and controller files
 
 - [x] Setup Prisma Service
   - [x] Create PrismaService
@@ -165,10 +136,10 @@
 
 ### Week 1 Validation
 
-- [ ] Database schema created and seeded
+- [x] Database schema created and seeded
 - [x] Both projects communicate successfully
 - [x] Basic routing works
-- [ ] Development environment stable
+- [x] Development environment stable
 - [x] Can query data from backend to frontend
 
 ---
@@ -177,15 +148,13 @@
 
 **Goal:** Complete management system for buildings and common areas.
 
-## Days 1-3: Buildings Module
-
 ### Backend
 
 - [x] Create Buildings module with full CRUD
   - [x] Generate resource with NestJS CLI
   - [x] Setup module, service, controller
 
-- [ ] Implement DTOs
+- [x] Implement DTOs
   - [x] `CreateBuildingDto` with all fields
   - [x] `UpdateBuildingDto` as partial
   - [x] Add class-validator decorators
@@ -198,13 +167,12 @@
   - [x] `update(id, dto)` method
   - [x] `remove(id)` method (soft delete)
 
-- [ ] Implement Buildings Controller
+- [x] Implement Buildings Controller
   - [x] `GET /buildings` - basic buildings list
-  - [ ] `GET /buildings/:id` - get one with relations
+  - [x] `GET /buildings/:id` - get one with relations
   - [x] `POST /buildings` - create new building
   - [x] `PATCH /buildings/:id` - update building
   - [x] `DELETE /buildings/:id` - soft delete building
-  - [ ] Add proper HTTP status codes
 
 ### Frontend
 
@@ -218,17 +186,16 @@
     - [x] `useUpdateBuilding.ts` (mutation)
     - [x] `useDeleteBuilding.ts` (mutation)
 
-- [ ] Create Buildings Components
-  - [ ] `BuildingTable.tsx` - table with Mantine
+- [x] Create Buildings Components
+  - [x] `BuildingTable.tsx` - table with Mantine
     - [x] Columns: photo, building name, address, manager, type, actions
-    - [x] Actions: view, delete buttons
-    - [ ] Loading skeleton
-    - [ ] Empty state
-  - [ ] `BuildingForm.tsx` - modal form
+    - [x] Actions: view and delete buttons
+    - [x] Loading skeleton
+    - [x] Empty state
+  - [x] `BuildingForm.tsx` - modal form
     - [x] Model fields as inputs
     - [x] Validations with Mantine useForm
     - [x] Handle create and edit modes
-    - [ ] States: idle, submitting, success, error
   - [x] `DeleteBuildingDialog.tsx` - confirmation modal
 
 - [x] Create Pages
@@ -242,17 +209,7 @@
     - [x] Edit button
     - [x] Back button
 
-### Validation
-
-- [ ] Complete CRUD works end-to-end
-- [ ] Frontend and backend validations working
-- [ ] Success/error notifications
-- [ ] React Query cache invalidation works correctly
-- [ ] UI is responsive
-
 ---
-
-## Days 4-5: Common Areas Module
 
 ### Backend
 
@@ -295,7 +252,7 @@
   - [ ] Button to add new area
   - [ ] Edit/delete area actions
 
-### Week 2 Validation
+### Validation
 
 - [ ] Buildings CRUD complete
 - [ ] Common Areas CRUD complete
@@ -308,8 +265,6 @@
 # 📅 WEEK 3: Units and Residents Management
 
 **Goal:** Units management system and resident assignment.
-
-## Days 1-2: Units Module
 
 ### Backend
 
@@ -352,8 +307,6 @@
   - [ ] Add/edit units
 
 ---
-
-## Days 3-5: Resident-Unit Assignment
 
 ### Backend
 
@@ -417,8 +370,6 @@
 
 **Goal:** Functional calendar-based booking system for common areas.
 
-## Days 1-3: Bookings Backend
-
 ### Backend
 
 - [ ] Update Prisma schema
@@ -469,8 +420,6 @@
 
 ---
 
-## Days 4-5: Bookings Frontend
-
 ### Frontend
 
 - [ ] Create `features/bookings/` structure
@@ -520,8 +469,6 @@
 
 **Goal:** Staff management and tickets/incidents system.
 
-## Days 1-2: Staff Module
-
 ### Backend
 
 - [ ] Create Staff module (using existing Staff model)
@@ -559,8 +506,6 @@
   - [ ] Add/edit/remove staff
 
 ---
-
-## Days 3-5: Tickets System
 
 ### Backend
 
@@ -640,8 +585,6 @@
 
 **Goal:** Complete authentication system with role-based access control.
 
-## Days 1-3: Backend Authentication
-
 ### Backend
 
 - [ ] Create Auth module
@@ -690,8 +633,6 @@
 - [ ] Invalid tokens are rejected
 
 ---
-
-## Days 4-5: Frontend Authentication
 
 ### Frontend
 
@@ -771,8 +712,6 @@
 
 **Goal:** Dashboard with metrics and application deployed.
 
-## Days 1-2: Dashboard with Metrics
-
 ### Backend
 
 - [ ] Create Dashboard module
@@ -832,8 +771,6 @@
 - [ ] Loading states work
 
 ---
-
-## Days 3-5: First Deployment
 
 ### Backend Deployment Preparation
 
@@ -903,8 +840,6 @@
 
 **Goal:** Code quality, testing, and comprehensive documentation.
 
-## Days 1-2: Testing
-
 ### Backend Testing
 
 - [ ] Setup Jest testing environment
@@ -938,8 +873,6 @@
   - [ ] Custom hooks
 
 ---
-
-## Days 3-4: Code Quality and Performance
 
 ### Code Quality
 
@@ -1013,8 +946,6 @@
 
 **Goal:** Implement pagination, review all UI texts, ensure responsive design, and add internationalization support.
 
-## Days 1-2: Pagination Implementation
-
 ### Backend Pagination
 
 - [ ] Implement pagination utilities
@@ -1070,8 +1001,6 @@
 
 ---
 
-## Day 3: UI Text Review and Copywriting
-
 ### Content Audit
 
 - [ ] Review all UI texts
@@ -1120,8 +1049,6 @@
 - [ ] Messages are clear and actionable
 
 ---
-
-## Day 4: Responsive Design Review
 
 ### Mobile Responsive Audit
 
@@ -1181,8 +1108,6 @@
 - [ ] Forms are easy to fill on mobile
 
 ---
-
-## Day 5: Internationalization (i18n)
 
 ### Backend i18n Setup
 

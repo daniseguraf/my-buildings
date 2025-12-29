@@ -1,4 +1,5 @@
 import type {
+  Amenities,
   Building,
   components,
   PropertyType,
@@ -28,4 +29,5 @@ export type BuildingFormValues = {
   phoneNumber?: string
   email?: string
   description?: string
+  amenities?: Amenities[]
 }

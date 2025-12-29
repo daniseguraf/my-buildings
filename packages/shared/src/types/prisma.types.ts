@@ -50,6 +50,25 @@ export const UserRoleValues = {
   STAFF: 'STAFF',
 } satisfies Record<string, UserRole>
 
+export type Amenities =
+  | 'PARKING'
+  | 'SECURITY_24_7'
+  | 'ELEVATOR'
+  | 'WHEELCHAIR_ACCESS'
+  | 'WHEELCHAIR_LIFT'
+  | 'FIRE_ALARM'
+  | 'CAMERAS'
+
+export const AmenitiesValues = {
+  PARKING: 'PARKING',
+  SECURITY_24_7: 'SECURITY_24_7',
+  ELEVATOR: 'ELEVATOR',
+  WHEELCHAIR_ACCESS: 'WHEELCHAIR_ACCESS',
+  WHEELCHAIR_LIFT: 'WHEELCHAIR_LIFT',
+  FIRE_ALARM: 'FIRE_ALARM',
+  CAMERAS: 'CAMERAS',
+} satisfies Record<string, Amenities>
+
 export type Building = {
   id: number
   name: string
@@ -70,6 +89,8 @@ export type Building = {
   deletedAt: Date | null
   manager?: Employee
   managerId: number
+  commonAreas?: CommonArea[]
+  amenities: Amenities[]
 }
 
 export type Employee = {
@@ -101,6 +122,7 @@ export type Unit = {
 export type CommonArea = {
   id: number
   buildingId: number
+  building?: Building
   name: string
   description: string | null
   capacity: number

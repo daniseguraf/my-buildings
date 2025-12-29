@@ -15,6 +15,7 @@ import {
   Title,
   Avatar,
   Divider,
+  List,
 } from '@mantine/core'
 import {
   BuildingOfficeIcon,
@@ -33,23 +34,23 @@ import { useBuilding } from '@features/buildings/hooks/queries/useBuilding'
 import { PropertyTypeValues } from '@my-buildings/shared/types/prisma.types'
 import { BuildingForm } from '@features/buildings/components/BuildingForm/BuildingForm'
 import { useDisclosure } from '@mantine/hooks'
+import { amenitiesDictionary } from '@utils/amenities.dictionary'
 
-const amenitiesOptions = [
-  'Estacionamiento',
-  'Seguridad 24/7',
-  'Gimnasio',
-  'Alberca',
-  'Jardín',
-  'Sala de juntas',
-  'Cafetería',
-  'Internet de alta velocidad',
-  'Elevadores',
-  'Salón de eventos',
-  'Área de juegos',
-  'Rooftop',
-  'Coworking',
-  'Pet-friendly',
-]
+// const amenitiesOptions = [
+//   'Estacionamiento',
+//   'Seguridad 24/7',
+//   'Gimnasio',
+//   'Alberca',
+//   'Jardín',
+//   'Sala de juntas',
+//   'Cafetería',
+//   'Internet de alta velocidad',
+//   'Elevadores',
+//   'Salón de eventos',
+//   'Área de juegos',
+//   'Rooftop',
+//   'Coworking',
+// ]
 
 export const BuildingDetailPage = () => {
   const { id } = useParams()
@@ -57,6 +58,21 @@ export const BuildingDetailPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
 
   const { isPending, data: building } = useBuilding(Number(id))
+
+  const {
+    name,
+    propertyType,
+    isActive,
+    address,
+    district,
+    city,
+    province,
+    description,
+    floors,
+    yearBuilt,
+    manager,
+    amenities = [],
+  } = building ?? {}
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -70,6 +86,7 @@ export const BuildingDetailPage = () => {
         return 'gray'
     }
   }
+  console.log(building)
 
   if (isPending) {
     return <span>Loading...</span>
@@ -112,33 +129,32 @@ export const BuildingDetailPage = () => {
                     variant="light"
                     size="lg"
                   >
-                    {building.propertyType}
+                    {propertyType}
                   </Badge>
                   <Badge
                     color={building.isActive ? 'green' : 'red'}
                     variant="dot"
                     size="lg"
                   >
-                    {building.isActive ? 'Activo' : 'Inactivo'}
+                    {isActive ? 'Active' : 'Inactive'}
                   </Badge>
                 </Group>
 
                 <Title order={1} mb="xs">
-                  {building.name}
+                  {name}
                 </Title>
 
                 <Group gap="xs">
                   <MapPinIcon size={18} />
                   <Text c="dimmed">
-                    {building.address}, {building.district} - {building.city},{' '}
-                    {building.province}
+                    {address}, {district} - {city}, {province}
                   </Text>
                 </Group>
               </div>
             </Group>
 
             <Text c="dimmed" mt="md">
-              {building.description}
+              {description}
             </Text>
           </Box>
         </Paper>
@@ -181,7 +197,7 @@ export const BuildingDetailPage = () => {
                         <Text size="sm" c="dimmed">
                           Pisos
                         </Text>
-                        <Text size="xl">{building.floors}</Text>
+                        <Text size="xl">{floors}</Text>
                       </div>
                     </Group>
 
@@ -193,7 +209,7 @@ export const BuildingDetailPage = () => {
                         <Text size="sm" c="dimmed">
                           Unidades
                         </Text>
-                        {/* <Text size="xl">{building.units}</Text> */}
+                        {/* <Text size="xl">{units}</Text> */}
                       </div>
                     </Group>
 
@@ -205,7 +221,7 @@ export const BuildingDetailPage = () => {
                         <Text size="sm" c="dimmed">
                           Año de Construcción
                         </Text>
-                        <Text size="xl">{building.yearBuilt}</Text>
+                        <Text size="xl">{yearBuilt}</Text>
                       </div>
                     </Group>
                   </Stack>
@@ -224,8 +240,7 @@ export const BuildingDetailPage = () => {
                           Manager Responsable
                         </Text>
                         <Text size="lg">
-                          {building.manager?.firstName}{' '}
-                          {building.manager?.lastName}
+                          {manager?.firstName} {manager?.lastName}
                         </Text>
                       </div>
                     </Group>
@@ -234,30 +249,32 @@ export const BuildingDetailPage = () => {
                   </Stack>
                 </Card>
               </Grid.Col>
+
+              {amenities?.length > 0 && (
+                <Grid.Col span={{ base: 12, md: 6 }}>
+                  <Card shadow="sm" padding="lg" radius="md" withBorder>
+                    <Title order={3} mb="lg">
+                      Available Amenities
+                    </Title>
+                    <List
+                      spacing="md"
+                      icon={
+                        <ThemeIcon color="teal" size={24} radius="xl">
+                          <CheckIcon size={16} />
+                        </ThemeIcon>
+                      }
+                    >
+                      {amenities.map(amenity => (
+                        <List.Item key={amenity}>
+                          <Text>{amenitiesDictionary[amenity]}</Text>
+                        </List.Item>
+                      ))}
+                    </List>
+                  </Card>
+                </Grid.Col>
+              )}
             </Grid>
           </Tabs.Panel>
-
-          {/* <Tabs.Panel value="amenities">
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Title order={3} mb="lg">
-              Amenidades Disponibles
-            </Title>
-            <List
-              spacing="md"
-              icon={
-                <ThemeIcon color="teal" size={24} radius="xl">
-                  <Check size={16} />
-                </ThemeIcon>
-              }
-            >
-              {building.amenities.map((amenity, index) => (
-                <List.Item key={index}>
-                  <Text>{amenity}</Text>
-                </List.Item>
-              ))}
-            </List>
-          </Card>
-        </Tabs.Panel> */}
 
           {/* <Tabs.Panel value="contact">
           <Grid gutter="lg">
@@ -275,7 +292,7 @@ export const BuildingDetailPage = () => {
                       <Text size="sm" c="dimmed">
                         Email
                       </Text>
-                      <Text>{building.contact.email}</Text>
+                      <Text>{contact.email}</Text>
                     </div>
                   </Group>
 
@@ -287,7 +304,7 @@ export const BuildingDetailPage = () => {
                       <Text size="sm" c="dimmed">
                         Teléfono
                       </Text>
-                      <Text>{building.contact.phone}</Text>
+                      <Text>{contact.phone}</Text>
                     </div>
                   </Group>
 

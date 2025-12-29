@@ -401,6 +401,22 @@
             "type": "number",
             "example": 1,
             "description": "Manager ID"
+          },
+          "amenities": {
+            "type": "string",
+            "example": [
+              "ELEVATOR"
+            ],
+            "description": "Building amenities",
+            "enum": [
+              "PARKING",
+              "SECURITY_24_7",
+              "ELEVATOR",
+              "WHEELCHAIR_ACCESS",
+              "WHEELCHAIR_LIFT",
+              "FIRE_ALARM",
+              "CAMERAS"
+            ]
           }
         },
         "required": [
@@ -415,7 +431,8 @@
           "floors",
           "phoneNumber",
           "email",
-          "managerId"
+          "managerId",
+          "amenities"
         ]
       },
       "Building": {
@@ -494,6 +511,22 @@
             "type": "number",
             "example": 1,
             "description": "Manager ID"
+          },
+          "amenities": {
+            "type": "string",
+            "example": [
+              "ELEVATOR"
+            ],
+            "description": "Building amenities",
+            "enum": [
+              "PARKING",
+              "SECURITY_24_7",
+              "ELEVATOR",
+              "WHEELCHAIR_ACCESS",
+              "WHEELCHAIR_LIFT",
+              "FIRE_ALARM",
+              "CAMERAS"
+            ]
           }
         }
       },
