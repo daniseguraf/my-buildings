@@ -24,23 +24,6 @@ export const UnitStatusValues = {
   MAINTENANCE: 'MAINTENANCE',
 } satisfies Record<string, UnitStatus>
 
-export type EmployeeRole =
-  | 'MANAGER'
-  | 'SECURITY'
-  | 'CLEANER'
-  | 'MAINTENANCE'
-  | 'GARDENER'
-  | 'RECEPTIONIST'
-
-export const EmployeeRoleValues = {
-  MANAGER: 'MANAGER',
-  SECURITY: 'SECURITY',
-  CLEANER: 'CLEANER',
-  MAINTENANCE: 'MAINTENANCE',
-  GARDENER: 'GARDENER',
-  RECEPTIONIST: 'RECEPTIONIST',
-} satisfies Record<string, EmployeeRole>
-
 export type PropertyType = 'RESIDENTIAL' | 'COMMERCIAL' | 'MIXED'
 
 export const PropertyTypeValues = {
@@ -49,13 +32,12 @@ export const PropertyTypeValues = {
   MIXED: 'MIXED',
 } satisfies Record<string, PropertyType>
 
-export type UserRole = 'ADMIN' | 'MANAGER' | 'RESIDENT' | 'STAFF'
+export type UserRole = 'ADMIN' | 'MANAGER' | 'RESIDENT'
 
 export const UserRoleValues = {
   ADMIN: 'ADMIN',
   MANAGER: 'MANAGER',
   RESIDENT: 'RESIDENT',
-  STAFF: 'STAFF',
 } satisfies Record<string, UserRole>
 
 export type Amenities =
@@ -95,24 +77,22 @@ export type Building = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
-  manager?: Employee
+  manager?: User
   managerId: number
   commonAreas?: CommonArea[]
   amenities: Amenities[]
 }
 
-export type Employee = {
+export type User = {
   id: number
   buildings?: Building[]
   firstName: string
   lastName: string
-  phoneNumber: string | null
   email: string
-  role: EmployeeRole
+  password: string
+  role: UserRole
   createdAt: Date
   updatedAt: Date
-  startDate: Date
-  endDate: Date | null
   isActive: boolean
 }
 

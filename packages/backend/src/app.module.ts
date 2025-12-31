@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 import { PrinterModule } from './printer/printer.module'
 import { PrismaModule } from './prisma/prisma.module'
 import { BuildingsModule } from './buildings/buildings.module'
-import { EmployeesModule } from './employees/employees.module'
+import { AuthModule } from './auth/auth.module'
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { EmployeesModule } from './employees/employees.module'
     PrinterModule,
     PrismaModule,
     BuildingsModule,
-    EmployeesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

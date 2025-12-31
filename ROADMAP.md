@@ -4,8 +4,6 @@
 
 Crear un sistema funcional y desplegado que demuestre habilidades fullstack completas. Cada fase implementa un feature completo (Backend + Frontend) para tener funcionalidad demostrable desde el inicio.
 
-**Tiempo estimado: 9-13 días (2 semanas)**
-
 ---
 
 ## 🏗️ FASE 1: Autenticación y Login (2-3 días)
@@ -925,19 +923,3 @@ Crear un sistema funcional y desplegado que demuestre habilidades fullstack comp
 - ✅ CI/CD automático
 
 ---
-
-## ⏱️ Cronograma Realista
-
-| Fase      | Duración       | Entregable                                 |
-| --------- | -------------- | ------------------------------------------ |
-| Fase 1    | 2-3 días       | Auth completo (backend + frontend)         |
-| Fase 2    | 2-3 días       | Buildings CRUD (backend + frontend)        |
-| Fase 3    | 2 días         | CommonAreas CRUD (backend + frontend)      |
-| Fase 4    | 3-4 días       | Reservations completo (backend + frontend) |
-| Fase 5    | 1-2 días       | Deploy en Railway + Vercel                 |
-| Fase 6    | 1 día          | Polish + README profesional                |
-| **TOTAL** | **11-15 días** | **MVP Portfolio-Ready**                    |
-
----
-
-🚀 **¿Listo para comenzar con la Fase 1: Autenticación?**
