@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common'
 import { UpdateAuthDto } from './dto/update-auth.dto'
 import { CreateUserDto } from 'src/auth/dto/create-user.dto'
 import { PrismaService } from 'src/prisma/prisma.service'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
@@ -11,9 +12,11 @@ export class AuthService {
 
   async create(createUserDto: CreateUserDto) {
     try {
-      this.logger.log('Creating user...')
       const user = await this.prismaService.user.create({
-        data: createUserDto,
+        data: {
+          ...createUserDto,
+          password: bcrypt.hashSync(createUserDto.password, 10),
+        },
       })
 
       return user
