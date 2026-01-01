@@ -3,12 +3,17 @@ import { CreateUserDto } from 'src/auth/dto/create-user.dto'
 import { PrismaService } from 'src/prisma/prisma.service'
 import * as bcrypt from 'bcrypt'
 import { LoginUserDto } from 'src/auth/dto/login-user.dto'
+import { JwtPayload } from 'src/auth/types/jwt-payload.types'
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class AuthService {
   private readonly logger = new Logger(AuthService.name)
 
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly jwtService: JwtService
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     try {
@@ -17,9 +22,17 @@ export class AuthService {
           ...createUserDto,
           password: bcrypt.hashSync(createUserDto.password, 10),
         },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+        },
       })
 
-      return user
+      const accessToken = this.generateJwtToken({ id: user.id })
+
+      return { ...user, accessToken }
     } catch (error) {
       this.logger.error(error)
       throw error
@@ -27,22 +40,14 @@ export class AuthService {
   }
 
   async login(loginUserDto: LoginUserDto) {
-    /*
-     * 1. Check if user exists
-     * 2. Check if password is correct
-     * 3. Generate JWT token
-     * 4. Return token
-     */
-
     const user = await this.prismaService.user.findUnique({
       where: { email: loginUserDto.email },
       select: {
         email: true,
         password: true,
+        id: true,
       },
     })
-
-    console.log(user)
 
     if (!user) throw new UnauthorizedException('User not found')
 
@@ -53,9 +58,15 @@ export class AuthService {
 
     if (!isPasswordValid) throw new UnauthorizedException('Invalid password')
 
+    const accessToken = this.generateJwtToken({ id: user.id })
+
     return {
-      message: 'Login successful',
-      user: user,
+      ...user,
+      accessToken,
     }
+  }
+
+  private generateJwtToken(payload: JwtPayload): string {
+    return this.jwtService.sign(payload)
   }
 }

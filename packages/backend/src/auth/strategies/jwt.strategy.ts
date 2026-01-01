@@ -3,10 +3,7 @@ import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { PrismaService } from 'src/prisma/prisma.service'
-
-type JwtPayload = {
-  email: string
-}
+import { JwtPayload } from 'src/auth/types/jwt-payload.types'
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -23,12 +20,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: JwtPayload) {
     const user = await this.prismaService.user.findUnique({
-      where: { email: payload.email },
+      where: { id: payload.id },
     })
 
     if (!user) throw new UnauthorizedException('Invalid token')
 
-    if (!user.isActive) throw new UnauthorizedException('User is not active')
+    if (!user.isActive)
+      throw new UnauthorizedException(
+        'User is not active, ask admin to activate your account'
+      )
 
     return user
   }
