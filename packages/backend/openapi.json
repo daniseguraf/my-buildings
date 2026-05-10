@@ -385,25 +385,6 @@
         ]
       }
     },
-    "/api/v1/seed": {
-      "get": {
-        "operationId": "SeedController_seedDB",
-        "parameters": [],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": [
-          "Seed"
-        ]
-      }
-    },
     "/api/v1/common-areas": {
       "post": {
         "operationId": "CommonAreasController_create",
