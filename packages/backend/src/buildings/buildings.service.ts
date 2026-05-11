@@ -9,6 +9,8 @@ import { UpdateBuildingDto } from './dto/update-building.dto'
 import { PrismaService } from '../prisma/prisma.service'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client'
 import { UserRole } from 'generated/prisma/enums'
+import { PaginationDto } from 'src/common/dtos/pagination.dto'
+import { FindAllBuildingsResponse } from 'src/common/types/buildings-response.types'
 
 @Injectable()
 export class BuildingsService {
@@ -36,12 +38,24 @@ export class BuildingsService {
     }
   }
 
-  async findAll(userId: number, role: UserRole) {
-    return await this.prismaService.building.findMany({
-      where: {
-        deletedAt: null,
-        managerId: role === UserRole.ADMIN ? undefined : userId,
-      },
+  async findAll(
+    userId: number,
+    role: UserRole,
+    paginationDto: PaginationDto
+  ): Promise<FindAllBuildingsResponse> {
+    const { page = 1, limit = 5 } = paginationDto
+
+    const currentPage = page < 1 ? 1 : page
+
+    const skip = (currentPage - 1) * limit
+
+    const where = {
+      deletedAt: null,
+      managerId: role === UserRole.ADMIN ? undefined : userId,
+    }
+
+    const buildings = await this.prismaService.building.findMany({
+      where,
       omit: {
         ...this.removeDateFields(),
         amenities: true,
@@ -56,7 +70,24 @@ export class BuildingsService {
       orderBy: {
         id: 'desc',
       },
+      take: Number(limit),
+      skip,
     })
+
+    const totalBuildings =
+      (await this.prismaService.building.count({ where })) ?? 0
+
+    const totalPages = Math.ceil(totalBuildings / limit)
+
+    return {
+      data: buildings,
+      pagination: {
+        totalPages,
+        currentPage,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+      },
+    }
   }
 
   async findOne(id: number) {

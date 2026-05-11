@@ -6,25 +6,39 @@ import {
   Button,
   Container,
   Group,
-  Modal,
+  Pagination,
   Paper,
   Table,
   Text,
   Title,
 } from '@mantine/core'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import { PlusIcon } from '@phosphor-icons/react/dist/csr/Plus'
-import { BuildingForm } from '@features/buildings/components/BuildingForm/BuildingForm'
 import { useDisclosure } from '@mantine/hooks'
 import { EyeIcon } from '@phosphor-icons/react/dist/csr/Eye'
 import { TrashIcon } from '@phosphor-icons/react/dist/ssr/Trash'
 import { useDeleteBuilding } from '@features/buildings/hooks/mutations/buildings/useDeleteBuilding'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { TableSkeleton } from '@features/buildings/components/TableSkeleton'
 import { BuildingsEmptyState } from '@features/buildings/components/BuildingsEmptyState'
 
+const BuildingForm = lazy(() =>
+  import('@features/buildings/components/BuildingForm/BuildingForm').then(
+    ({ BuildingForm }) => ({ default: BuildingForm })
+  )
+)
+
+const Modal = lazy(() =>
+  import('@mantine/core').then(({ Modal }) => ({
+    default: Modal,
+  }))
+)
 export const BuildingsListPage = () => {
-  const { isPending, data: buildings } = useBuildings()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const page = Number(searchParams.get('page')) || 1
+
+  const { isPending, data: buildingsResponse } = useBuildings(page)
+
   const [opened, { open, close }] = useDisclosure(false)
   const [
     deleteModalOpened,
@@ -36,6 +50,8 @@ export const BuildingsListPage = () => {
 
   const { mutate: deleteBuilding, isPending: isDeletingBuilding } =
     useDeleteBuilding()
+
+  const { data: buildings, pagination } = buildingsResponse ?? {}
 
   const isEmptyBuildings = buildings?.length === 0
 
@@ -53,6 +69,10 @@ export const BuildingsListPage = () => {
         },
       })
     }
+  }
+
+  const handlePageChange = (page: number) => {
+    setSearchParams({ page: page.toString() })
   }
 
   return (
@@ -177,34 +197,46 @@ export const BuildingsListPage = () => {
             </Table.ScrollContainer>
           )}
         </Paper>
+
+        <Group justify="center" py="md">
+          <Pagination
+            value={page}
+            total={pagination?.totalPages ?? 0}
+            onChange={handlePageChange}
+          />
+        </Group>
       </Container>
 
-      <BuildingForm opened={opened} onClose={close} />
+      <Suspense fallback={null}>
+        <BuildingForm opened={opened} onClose={close} />
+      </Suspense>
 
-      <Modal
-        title="Delete this building?"
-        opened={deleteModalOpened}
-        onClose={closeDeleteModal}
-      >
-        Are you sure you want to delete this building? This action cannot be
-        undone.
-        <Group mt="lg" justify="flex-end">
-          <Button
-            onClick={closeDeleteModal}
-            variant="default"
-            disabled={isDeletingBuilding}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleDeleteBuilding}
-            color="red"
-            loading={isDeletingBuilding}
-          >
-            Delete
-          </Button>
-        </Group>
-      </Modal>
+      <Suspense fallback={null}>
+        <Modal
+          title="Delete this building?"
+          opened={deleteModalOpened}
+          onClose={closeDeleteModal}
+        >
+          Are you sure you want to delete this building? This action cannot be
+          undone.
+          <Group mt="lg" justify="flex-end">
+            <Button
+              onClick={closeDeleteModal}
+              variant="default"
+              disabled={isDeletingBuilding}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleDeleteBuilding}
+              color="red"
+              loading={isDeletingBuilding}
+            >
+              Delete
+            </Button>
+          </Group>
+        </Modal>
+      </Suspense>
     </>
   )
 }

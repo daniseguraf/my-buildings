@@ -1,10 +1,10 @@
 import { buildingsService } from '@features/buildings/services/buildings.service'
-import type { Building } from '@my-buildings/shared/index'
 import { useQuery } from '@tanstack/react-query'
+import type { FindAllBuildingsResponse } from '@features/buildings/services/buildings.service'
 
-export const useBuildings = () => {
-  return useQuery<Building[]>({
-    queryKey: ['buildings', 'list'],
-    queryFn: () => buildingsService.getAll(),
+export const useBuildings = (page: number) => {
+  return useQuery<FindAllBuildingsResponse>({
+    queryKey: ['buildings', 'list', page],
+    queryFn: () => buildingsService.getAll(page),
   })
 }

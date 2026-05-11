@@ -1,13 +1,44 @@
 import { api } from '@lib/axios'
-import type { Building } from '@my-buildings/shared'
+import type { Building, User } from '@my-buildings/shared'
 import type {
   CreateBuildingDto,
   UpdateBuildingDto,
 } from '@features/buildings/types/building.types'
 
+// TODO: Move to shared package
+export type Pagination = {
+  totalPages: number
+  currentPage: number
+  hasNextPage: boolean
+  hasPreviousPage: boolean
+}
+
+// TODO: Move to shared package
+export type FindAllBuildingsResponse = {
+  data: (Pick<
+    Building,
+    | 'id'
+    | 'name'
+    | 'propertyType'
+    | 'address'
+    | 'district'
+    | 'city'
+    | 'floors'
+    | 'isActive'
+    | 'managerId'
+  > & {
+    manager: Pick<User, 'id' | 'firstName' | 'lastName' | 'email'>
+  })[]
+  pagination: Pagination
+}
+
 export const buildingsService = {
-  getAll: async (): Promise<Building[]> => {
-    const { data } = await api.get<Building[]>('/buildings')
+  getAll: async (page: number): Promise<FindAllBuildingsResponse> => {
+    const { data } = await api.get<FindAllBuildingsResponse>('/buildings', {
+      params: {
+        page,
+      },
+    })
 
     return data
   },

@@ -8,6 +8,7 @@ import {
   Delete,
   ParseIntPipe,
   BadRequestException,
+  Query,
 } from '@nestjs/common'
 import { BuildingsService } from './buildings.service'
 import { CreateBuildingDto } from './dto/create-building.dto'
@@ -24,6 +25,7 @@ import {
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { UserRole } from 'generated/prisma/client'
 import { GetUser } from 'src/common/decorators/get-user.decorator'
+import { PaginationDto } from 'src/common/dtos/pagination.dto'
 
 @ApiTags('Buildings')
 @Controller('buildings')
@@ -43,8 +45,12 @@ export class BuildingsController {
   @Get()
   @Auth(UserRole.ADMIN, UserRole.MANAGER)
   @ApiFindAllOperation('Get all buildings', 'buildings', Building)
-  findAll(@GetUser('id') userId: number, @GetUser('role') role: UserRole) {
-    return this.buildingsService.findAll(userId, role)
+  findAll(
+    @GetUser('id') userId: number,
+    @GetUser('role') role: UserRole,
+    @Query() paginationDto: PaginationDto
+  ) {
+    return this.buildingsService.findAll(userId, role, paginationDto)
   }
 
   @Get(':id')

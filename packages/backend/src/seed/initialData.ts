@@ -248,6 +248,24 @@ export const buildingsData = [
     amenities: [Amenities.PARKING, Amenities.ELEVATOR, Amenities.FIRE_ALARM],
     managerId: 2,
   },
+  {
+    id: 14,
+    name: 'Residential Complex Las Flores',
+    description: 'Residential complex with green areas',
+    yearBuilt: 2015,
+    propertyType: PropertyType.RESIDENTIAL,
+    address: 'Rose Street 789',
+    district: 'Residential District',
+    city: 'Lima',
+    province: 'Lima',
+    postalCode: '15023',
+    floors: 8,
+    phoneNumber: '+51 1 555-1234',
+    email: 'administration@residentialbuilding.com',
+    isActive: true,
+    amenities: [Amenities.PARKING, Amenities.ELEVATOR, Amenities.FIRE_ALARM],
+    managerId: 2,
+  },
 ]
 
 export const usersData = [
