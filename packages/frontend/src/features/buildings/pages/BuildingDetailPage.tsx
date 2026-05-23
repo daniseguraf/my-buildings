@@ -37,7 +37,12 @@ export const BuildingDetailPage = () => {
   const navigate = useNavigate()
   const [opened, { open, close }] = useDisclosure(false)
 
-  const { isPending, data: building } = useBuilding(Number(id))
+  const formattedId = Number(id)
+  const isValidId = !isNaN(formattedId) && formattedId > 0
+
+  const { isPending, data: building } = useBuilding(
+    isValidId ? formattedId : -1
+  )
 
   if (isPending) return <BuildingDetailPageSkeleton />
 

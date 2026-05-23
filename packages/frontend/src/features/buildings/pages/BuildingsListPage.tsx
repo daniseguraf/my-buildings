@@ -21,6 +21,8 @@ import { useDeleteBuilding } from '@features/buildings/hooks/mutations/buildings
 import { lazy, Suspense, useState } from 'react'
 import { TableSkeleton } from '@features/buildings/components/TableSkeleton'
 import { BuildingsEmptyState } from '@features/buildings/components/BuildingsEmptyState'
+import { useQueryClient } from '@tanstack/react-query'
+import { buildingsService } from '@features/buildings/services/buildings.service'
 
 const BuildingForm = lazy(() =>
   import('@features/buildings/components/BuildingForm/BuildingForm').then(
@@ -33,7 +35,9 @@ const Modal = lazy(() =>
     default: Modal,
   }))
 )
+
 export const BuildingsListPage = () => {
+  const queryClient = useQueryClient()
   const [searchParams, setSearchParams] = useSearchParams()
   const page = Number(searchParams.get('page')) || 1
 
@@ -73,6 +77,14 @@ export const BuildingsListPage = () => {
 
   const handlePageChange = (page: number) => {
     setSearchParams({ page: page.toString() })
+  }
+
+  const prefetchBuilding = (selectedBuildingId: number) => {
+    queryClient.prefetchQuery({
+      queryKey: ['buildings', 'detail', selectedBuildingId],
+      queryFn: () => buildingsService.getById(selectedBuildingId),
+      staleTime: 1000 * 60 * 1, // 1 minute
+    })
   }
 
   return (
@@ -132,7 +144,10 @@ export const BuildingsListPage = () => {
                         propertyType,
                         district,
                       }) => (
-                        <Table.Tr key={id}>
+                        <Table.Tr
+                          key={id}
+                          onMouseEnter={() => prefetchBuilding(id)}
+                        >
                           <Table.Td>
                             <Text size="sm">{id}</Text>
                           </Table.Td>

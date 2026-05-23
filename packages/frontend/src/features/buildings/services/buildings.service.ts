@@ -34,6 +34,7 @@ export type FindAllBuildingsResponse = {
 
 export const buildingsService = {
   getAll: async (page: number): Promise<FindAllBuildingsResponse> => {
+    // await sleep(3000)
     const { data } = await api.get<FindAllBuildingsResponse>('/buildings', {
       params: {
         page,
@@ -44,6 +45,7 @@ export const buildingsService = {
   },
 
   getById: async (id: number): Promise<Building> => {
+    // await sleep(3000)
     const { data } = await api.get<Building>(`/buildings/${id}`)
 
     return data

@@ -53,7 +53,7 @@ export const AppRoutes = () => {
         <Route
           path="/buildings/:id"
           element={
-            <ProtectedRoute allowedRoles={[manager]}>
+            <ProtectedRoute allowedRoles={[admin, manager]}>
               <BuildingDetailPage />
             </ProtectedRoute>
           }
