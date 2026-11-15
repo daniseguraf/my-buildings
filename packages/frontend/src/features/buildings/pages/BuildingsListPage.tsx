@@ -24,17 +24,19 @@ import { BuildingsEmptyState } from '@features/buildings/components/BuildingsEmp
 import { useQueryClient } from '@tanstack/react-query'
 import { buildingsService } from '@features/buildings/services/buildings.service'
 
-const BuildingForm = lazy(() =>
-  import('@features/buildings/components/BuildingForm/BuildingForm').then(
-    ({ BuildingForm }) => ({ default: BuildingForm })
+const BuildingForm = lazy(async () => {
+  const { BuildingForm } = await import(
+    /* webpackChunkName: "building-form" */
+    '@features/buildings/components/BuildingForm/BuildingForm'
   )
-)
 
-const Modal = lazy(() =>
-  import('@mantine/core').then(({ Modal }) => ({
-    default: Modal,
-  }))
-)
+  return { default: BuildingForm }
+})
+
+const Modal = lazy(async () => {
+  const { Modal } = await import('@mantine/core')
+  return { default: Modal }
+})
 
 export const BuildingsListPage = () => {
   const queryClient = useQueryClient()

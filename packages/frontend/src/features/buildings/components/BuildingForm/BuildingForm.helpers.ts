@@ -1,5 +1,5 @@
 import { AmenitiesValues, PropertyTypeValues } from '@my-buildings/shared/index'
-import { z } from 'zod'
+import * as z from 'zod'
 
 export const buildingFormSchema = z.object({
   name: z.string().min(3),

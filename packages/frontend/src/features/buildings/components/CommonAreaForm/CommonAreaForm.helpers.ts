@@ -3,7 +3,7 @@ import {
   getAreaLabel,
 } from '@features/buildings/components/CommonAreas/CommonAreas.helpers'
 import { CommonAreasValues, DaysOfWeekValues } from '@my-buildings/shared/index'
-import { z } from 'zod'
+import * as z from 'zod'
 
 export const commonAreaFormSchema = z.object({
   type: z.string().min(1, 'Select an option'),

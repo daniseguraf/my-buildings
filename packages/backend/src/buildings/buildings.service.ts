@@ -109,7 +109,7 @@ export class BuildingsService {
     })
 
     if (!building) {
-      throw new NotFoundException(`Building with id ${id} not found`)
+      throw new NotFoundException(`Building with id ${id} was not found`)
     }
 
     return building

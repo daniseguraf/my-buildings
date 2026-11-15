@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import * as z from 'zod'
 
 export const envSchema = z.object({
   environment: z.enum(['development', 'production']).default('development'),
