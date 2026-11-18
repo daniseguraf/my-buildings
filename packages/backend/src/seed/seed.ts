@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@generated/prisma/client'
 import * as bcrypt from 'bcrypt'
-import { buildingsData, usersData } from './initialData'
+import { buildingsData, commonAreasData, usersData } from './initialData'
 
 const prismaService = new PrismaClient({
   adapter: new PrismaPg({
@@ -14,6 +14,7 @@ export const seed = async () => {
   await deleteAllData()
   await seedUsers()
   await seedBuildings()
+  await seedCommonAreas()
   await seedResidentUsers()
 
   console.log('Database seeded successfully')
@@ -22,12 +23,12 @@ export const seed = async () => {
 const deleteAllData = async () => {
   console.log('Deleting existing data...')
 
+  await prismaService.reservation.deleteMany()
+  await prismaService.commonArea.deleteMany()
   await prismaService.building.deleteMany()
   await prismaService.user.deleteMany()
-  await prismaService.commonArea.deleteMany()
-  await prismaService.reservation.deleteMany()
 
-  // console.log('All data has been deleted')
+  console.log('All data has been deleted')
 }
 
 const seedUsers = async () => {
@@ -59,6 +60,19 @@ const seedBuildings = async () => {
   )
 
   return buildings
+}
+
+const seedCommonAreas = async () => {
+  console.log('Seeding common areas...')
+  const commonAreas = await Promise.all(
+    commonAreasData.map(commonArea =>
+      prismaService.commonArea.create({
+        data: commonArea,
+      })
+    )
+  )
+
+  return commonAreas
 }
 
 const seedResidentUsers = async () => {

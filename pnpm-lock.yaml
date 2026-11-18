@@ -81,6 +81,9 @@ importers:
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7
+      dotenv:
+        specifier: ^16.6.1
+        version: 16.6.1
       pdfmake:
         specifier: ^0.2.23
         version: 0.2.23
