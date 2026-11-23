@@ -790,8 +790,7 @@
           "district",
           "city",
           "province",
-          "floors",
-          "amenities"
+          "floors"
         ]
       },
       "Building": {

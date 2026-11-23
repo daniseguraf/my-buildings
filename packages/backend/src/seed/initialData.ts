@@ -9,7 +9,7 @@ import { Building, CommonArea } from 'generated/prisma/browser'
 
 const at = (hours: number, minutes = 0) =>
   new Date(
-    `1970-01-01T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00.000Z`,
+    `1970-01-01T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00.000Z`
   )
 
 const weekdays = [
@@ -718,7 +718,7 @@ export const commonAreasData: Omit<
         buildingId,
         isActive: true,
         ...area,
-      })),
+      }))
     )
 })()
 

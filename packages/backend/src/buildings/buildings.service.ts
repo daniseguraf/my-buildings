@@ -19,9 +19,20 @@ export class BuildingsService {
   async create(createBuildingDto: CreateBuildingDto, userId: number) {
     try {
       return await this.prismaService.building.create({
-        data: { ...createBuildingDto, managerId: userId },
+        data: {
+          ...createBuildingDto,
+          managerId: userId,
+          images: {
+            createMany: {
+              data:
+                createBuildingDto.images?.map(image => ({ url: image })) ?? [],
+            },
+          },
+        },
+        include: this.setImages(),
       })
     } catch (error) {
+      console.log(error)
       if (error instanceof PrismaClientKnownRequestError) {
         // P2002: Unique constraint violation
         if (error.code === 'P2002') {
@@ -43,7 +54,7 @@ export class BuildingsService {
     role: UserRole,
     paginationDto: PaginationDto
   ): Promise<FindAllBuildingsResponse> {
-    const { page = 1, limit = 5 } = paginationDto
+    const { page = 1, limit = 10 } = paginationDto
 
     const currentPage = page < 1 ? 1 : page
 
@@ -66,7 +77,7 @@ export class BuildingsService {
         yearBuilt: true,
         province: true,
       },
-      include: this.setManager(),
+      include: { ...this.setManager(), ...this.setImages() },
       orderBy: {
         id: 'desc',
       },
@@ -98,6 +109,7 @@ export class BuildingsService {
       },
       include: {
         ...this.setManager(),
+        ...this.setImages(),
         commonAreas: {
           where: { deletedAt: null },
           omit: this.removeDateFields(),
@@ -118,11 +130,34 @@ export class BuildingsService {
   async update(id: number, updateBuildingDto: UpdateBuildingDto) {
     await this.findOne(id)
 
+    const { images, ...buildingData } = updateBuildingDto
+
     try {
-      return await this.prismaService.building.update({
-        where: { id },
-        omit: this.removeDateFields(),
-        data: updateBuildingDto,
+      if (images === undefined) {
+        return await this.prismaService.building.update({
+          where: { id },
+          data: buildingData,
+          omit: this.removeDateFields(),
+          include: this.setImages(),
+        })
+      }
+
+      return await this.prismaService.$transaction(async tx => {
+        const imagesPayload = {
+          deleteMany: { deletedAt: null },
+          ...(images.length > 0 && {
+            create: images.map(url => ({ url })),
+          }),
+        }
+        return tx.building.update({
+          where: { id },
+          data: {
+            ...buildingData,
+            images: imagesPayload,
+          },
+          omit: this.removeDateFields(),
+          include: this.setImages(),
+        })
       })
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
@@ -201,6 +236,15 @@ export class BuildingsService {
       createdAt: true,
       updatedAt: true,
       deletedAt: true,
+    }
+  }
+
+  private setImages() {
+    return {
+      images: {
+        where: { deletedAt: null },
+        select: { id: true, url: true },
+      },
     }
   }
 }

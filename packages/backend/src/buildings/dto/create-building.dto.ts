@@ -68,12 +68,17 @@ export class CreateBuildingDto {
   @IsEmail()
   email?: string
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     example: [Amenities.ELEVATOR, Amenities.PARKING],
     description: 'Building amenities',
     isArray: true,
     enum: Amenities,
   })
   @IsArray()
-  amenities: Amenities[]
+  @IsOptional()
+  amenities?: Amenities[]
+
+  @IsArray()
+  @IsOptional()
+  images?: string[]
 }

@@ -62,4 +62,8 @@ export class CreateCommonAreaDto {
   @IsEnum(DaysOfWeek, { each: true })
   @IsOptional()
   daysAvailable: DaysOfWeek[]
+
+  @IsArray()
+  @IsOptional()
+  images?: string[]
 }

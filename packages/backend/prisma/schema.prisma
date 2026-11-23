@@ -39,10 +39,23 @@ model Building {
   manager      User         @relation("BuildingManager", fields: [managerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   managerId    Int          @map("manager_id")
   commonAreas  CommonArea[]
-  amenities    Amenities[]
+  amenities    Amenities[] @default([])
   residents    User[]       @relation("BuildingResident")
+  images       BuildingImage[]
 
   @@map("buildings")
+}
+
+model BuildingImage {
+  id           Int          @id @default(autoincrement())
+  buildingId   Int          @map("building_id")
+  building     Building     @relation(fields: [buildingId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  url          String       @map("url")
+  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  deletedAt    DateTime?    @map("deleted_at") @db.Timestamptz(3)
+
+  @@map("building_image")
 }
 
 model User {
@@ -80,8 +93,22 @@ model CommonArea {
   closeTime              DateTime       @map("close_time") @db.Time(0)
   daysAvailable          DaysOfWeek[]  @default([]) @map("days_available")
   reservations           Reservation[]
+  images                 CommonAreaImage[]
 
   @@map("common_areas")
+}
+
+model CommonAreaImage {
+  id           Int          @id @default(autoincrement())
+  commonAreaId Int          @map("common_area_id")
+  commonArea   CommonArea   @relation(fields: [commonAreaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  url          String       @map("url")
+  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  deletedAt    DateTime?    @map("deleted_at") @db.Timestamptz(3)
+
+
+  @@map("common_area_image")
 }
 
 model Reservation {

@@ -109,6 +109,17 @@ export type Building = {
   commonAreas?: CommonArea[]
   amenities: Amenities[]
   residents?: User[]
+  images?: BuildingImage[]
+}
+
+export type BuildingImage = {
+  id: number
+  buildingId: number
+  building?: Building
+  url: string
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
 }
 
 export type User = {
@@ -143,6 +154,17 @@ export type CommonArea = {
   closeTime: Date
   daysAvailable: DaysOfWeek[]
   reservations?: Reservation[]
+  images?: CommonAreaImage[]
+}
+
+export type CommonAreaImage = {
+  id: number
+  commonAreaId: number
+  commonArea?: CommonArea
+  url: string
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
 }
 
 export type Reservation = {

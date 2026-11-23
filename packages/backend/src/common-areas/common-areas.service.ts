@@ -23,6 +23,12 @@ export class CommonAreasService {
         ...commonAreaData,
         openTime: openTimeDate,
         closeTime: closeTimeDate,
+        images: {
+          createMany: {
+            data:
+              createCommonAreaDto.images?.map(image => ({ url: image })) ?? [],
+          },
+        },
       },
     })
   }
@@ -54,6 +60,12 @@ export class CommonAreasService {
         ...commonAreaData,
         openTime: openTimeDate,
         closeTime: closeTimeDate,
+        images: {
+          createMany: {
+            data:
+              updateCommonAreaDto.images?.map(image => ({ url: image })) ?? [],
+          },
+        },
       },
     })
   }
