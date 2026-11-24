@@ -681,6 +681,20 @@
           "Reservations"
         ]
       }
+    },
+    "/api/v1/files/product": {
+      "post": {
+        "operationId": "FilesController_uploadFile",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Files"
+        ]
+      }
     }
   },
   "info": {

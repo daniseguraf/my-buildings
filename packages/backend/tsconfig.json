@@ -24,6 +24,7 @@
       "src/*": ["./src/*"],
       "generated/*": ["./generated/*"],
       "@generated/*": ["./generated/*"]
-    }
+    },
+    "types": ["node", "multer"]
   }
 }

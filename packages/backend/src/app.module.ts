@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module'
 import { CommonAreasModule } from './common-areas/common-areas.module'
 import { ReservationsModule } from './reservations/reservations.module'
 import { envConfig } from 'src/config/env.config'
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { envConfig } from 'src/config/env.config'
     AuthModule,
     CommonAreasModule,
     ReservationsModule,
+    FilesModule,
   ],
 })
 export class AppModule {}
